@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "spark"
+version = "0.0.1"
+requires-python = ">=3.11,<3.12"
+description = "PySpark applications for scalable data processing in the A360 Data Lake"
+authors = [
+  { name="Shawn Albert", email="shawn.albert@aesthetics360.com" }
+]
+
+dependencies = [
+  'great-expectations==0.15.6',
+  "pyspark==3.5.5",
+]
+
+[project.optional-dependencies]
+tests = [
+  'pytest==7.3.1',
+]
+
+[tool.setuptools.packages]
+find = {namespaces = false, exclude=['test']}

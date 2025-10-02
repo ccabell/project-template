@@ -1,0 +1,214 @@
+name: CDK Deployment
+run-name: CDK ${{ inputs.cdk_action }} - ${{ inputs.environment }}
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        type: choice
+        required: true
+        description: Choose environment
+        default: 'dev'
+        options:
+          - dev
+          - staging
+          - prod
+      cdk_stack:
+        type: choice
+        required: true
+        description: Choose CDK stack
+        default: 'MDADataFoundationStack'
+        options:
+          - MDADataFoundationStack
+          - DagsterSecurityStack
+          - DagsterServiceDiscoveryStack
+          - DagsterEcsStack
+          - DagsterMonitoringStack
+          - DagsterAutoScalingStack
+          - PodcastPipelineMedallionStack
+          - GitHubOIDCRoleStack
+          - ConsultationMedallionStack
+          - ConsultationObjectLambdaStack
+          - MacieClassificationStack
+          - ConsultationDagsterStack
+          - LakeFSStack
+      cdk_action:
+        type: choice
+        required: true
+        description: Choose CDK action
+        default: 'diff'
+        options:
+          - diff
+          - deploy
+      cdk_exclusively:
+        type: choice
+        required: true
+        description: Don't include dependencies (exclusively)
+        default: 'exclusively'
+        options:
+          - exclusively
+          - not_exclusively
+
+env:
+  AWS_DEFAULT_REGION: us-east-1
+  CDK_DEFAULT_REGION: us-east-1
+  CDK_DEFAULT_ACCOUNT: "${{ contains(inputs.environment, 'dev') && '277707121008' || contains(inputs.environment, 'staging') && '863518416131' || contains(inputs.environment, 'prod') && '664418972896' || '277707121008' }}"
+  WORKING_DIRECTORY: infra
+  STACK_NAME: "${{ inputs.cdk_stack }}-${{ inputs.environment }}"
+
+jobs:
+  deploy:
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+      id-token: write
+      actions: read
+      repository-projects: read
+    
+    steps:
+      - id: checkout
+        name: Checkout
+        uses: actions/checkout@v4
+
+      - id: setup-qemu
+        name: Setup QEMU
+        uses: docker/setup-qemu-action@v3
+
+      - id: setup-buildx
+        name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+        with:
+          buildkitd-flags: --debug
+          driver-opts: |
+            image=moby/buildkit:latest
+            network=host
+
+      - id: setup-node
+        name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22.2.0'
+          cache: 'npm'
+          cache-dependency-path: '${{ env.WORKING_DIRECTORY}}/package-lock.json'
+
+      - id: setup-python
+        name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version-file: "pyproject.toml"
+          cache-dependency-path: |
+            pyproject.toml
+            uv.lock
+          allow-prereleases: true
+          check-latest: true
+
+      - id: uv-install
+        name: Install uv and define a cache dependency glob
+        uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+          cache-dependency-glob: "uv.lock"
+      
+      - id: install-deps
+        name: Install Dependencies
+        run: |
+          uv venv
+          source .venv/bin/activate
+          uv sync --all-extras --dev
+          cd ${{ env.WORKING_DIRECTORY}} && npm ci
+
+      - id: list-build-runs
+        name: List Build Workflow Runs
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const workflowID = 142827901;
+            const runs = await github.rest.actions.listWorkflowRuns({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              workflow_id: workflowID,
+              status: 'success',
+              per_page: 1,
+              page: 1,
+            });
+
+            if (runs.data.workflow_runs.length === 0) {
+              throw new Error('No successful workflow runs found');
+            }
+
+            const runId = runs.data.workflow_runs[0].id;
+            core.setOutput('run_id', runId);
+          result-encoding: string
+
+      - id: authenticate-oidc
+        name: Authenticate Via OIDC Role
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-region: ${{ env.AWS_DEFAULT_REGION }}
+          role-to-assume: arn:aws:iam::${{ env.CDK_DEFAULT_ACCOUNT }}:role/AWSGitHubOIDCAdministratorRole
+
+      - id: verify-lambda-assets
+        name: Verify Lambda Assets Exist
+        working-directory: ./${{ env.WORKING_DIRECTORY }}
+        run: |
+          echo "=== Verifying Lambda asset directories ==="
+          find . -name "lambda" -type d | grep lakefs || echo "No lakefs lambda directories found"
+          echo "=== Checking infra/lakefs/lambda structure ==="
+          if [ -d "lakefs/lambda" ]; then
+            echo "Contents of lakefs/lambda:"
+            find lakefs/lambda -type f
+          else
+            echo "lakefs/lambda directory does not exist"
+          fi
+          echo "=== Setting PYTHONPATH for module resolution ==="
+          export PYTHONPATH=$PWD/..
+          echo "PYTHONPATH set to: $PYTHONPATH"
+
+      - id: cdk-synth
+        name: CDK Synth
+        working-directory: ./${{ env.WORKING_DIRECTORY }}
+        env:
+          ENVIRONMENT: ${{ inputs.environment }}
+          PYTHONPATH: ..
+        run: |
+          source ../.venv/bin/activate
+          echo "DEBUG: Current working directory: $(pwd)"
+          echo "DEBUG: PYTHONPATH set to: $PYTHONPATH"
+          npx cdk synth --context stage=${{ inputs.environment }}
+  
+      - id: list-cdk-out
+        name: List cdk.out contents
+        run: ls -R ${{ env.WORKING_DIRECTORY}}/cdk.out
+
+      - id: cdk-diff
+        name: CDK Diff
+        if: inputs.cdk_action == 'diff'
+        working-directory: ./${{ env.WORKING_DIRECTORY}}
+        env:
+          ENVIRONMENT: ${{ inputs.environment }}
+        run: |
+          source ../.venv/bin/activate
+          if [[ "${{ inputs.cdk_exclusively }}" == "exclusively" ]]; then
+            npx cdk diff ${{ env.STACK_NAME }} --app cdk.out --exclusively
+          else
+            npx cdk diff ${{ env.STACK_NAME }} --app cdk.out
+          fi
+
+      - id: cdk-deploy
+        name: CDK Deploy
+        if: inputs.cdk_action == 'deploy'
+        working-directory: ./${{ env.WORKING_DIRECTORY}}
+        env:
+          ENVIRONMENT: ${{ inputs.environment }}
+        run: |
+          source ../.venv/bin/activate
+          if [[ "${{ inputs.cdk_exclusively }}" == "exclusively" ]]; then
+            npx cdk deploy --require-approval=never ${{ env.STACK_NAME }} --app cdk.out --exclusively \
+            --require-approval never \
+            --verbose
+          else
+            npx cdk deploy --require-approval=never ${{ env.STACK_NAME }} --app cdk.out \
+            --require-approval never \
+            --verbose
+          fi
+        

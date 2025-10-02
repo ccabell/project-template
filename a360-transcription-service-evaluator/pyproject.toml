@@ -1,0 +1,62 @@
+[project]
+name = "a360-transcription-service-evaluator"
+version = "0.1.0"
+description = "Comprehensive transcription evaluation toolkit with S3 storage and advanced analysis"
+authors = [
+    { name = "shawn-albert", email = "shawn.albert@aesthetics360.com" }
+]
+requires-python = ">=3.12"
+dependencies = [
+    "boto3>=1.35.0",
+    "botocore>=1.35.0",
+    "pycognito>=2024.5.1",
+    "sqlalchemy>=2.0.0",
+    "psycopg2-binary>=2.9.0",
+    "rapidfuzz>=3.9.0",
+    "python-Levenshtein>=0.25.0",
+    "pandas>=2.0.0",
+    "matplotlib>=3.7.0",
+    "deepgram-sdk>=3.0.0",
+    "elevenlabs>=1.0.0",
+    "pydantic[email]>=2.0.0",
+    "pydantic-settings>=2.0.0",
+    "typer>=0.9.0",
+    "rich>=13.0.0",
+    "fastapi>=0.104.0",
+    "uvicorn[standard]>=0.24.0",
+    "gunicorn>=21.2.0",
+    "aws-lambda-powertools>=3.0.0",
+    "aws-cdk-lib==2.208.0",
+    "constructs>=10.4.2",
+]
+
+[project.scripts]
+transcription-evaluator = "transcription_evaluator.cli.main:main"
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-asyncio>=0.21.0",
+    "pytest-cov>=4.0.0",
+    "mypy>=1.0.0",
+    "ruff>=0.1.0",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["backend/transcription_evaluator"]
+
+[dependency-groups]
+dev = [
+    "deepgram-sdk>=4.8.1",
+    "elevenlabs>=2.10.0",
+    "httpx>=0.28.1",
+    "pytest>=8.4.1",
+    "pytest-asyncio>=1.1.0",
+    "pytest-cov>=6.2.1",
+    "pytest-watcher>=0.4.3",
+    "pytest-xdist>=3.8.0",
+]

@@ -1,0 +1,12 @@
+Patient: Doctor, estoy interesada en el lip flip con micro-Botox para mis labios.
+Doctor: El lip flip es excelente para labios delgados, usaremos muy pocas unidades de neurotoxina.
+Patient: ¿Restylane Kysse sería mejor opción que Juvederm Ultra XC para volumen labial?
+Doctor: Kysse está diseñado específicamente para labios con tecnología XpresHAn para movimiento natural.
+Patient: Mi amiga se hizo Sculptra, ¿es muy diferente del PLLA que mencionó?
+Doctor: Sculptra contiene ácido poli-L-láctico, que es exactamente PLLA, estimula colágeno gradualmente.
+Patient: ¿Para mis líneas marionette recomendaría Radiesse o Restylane Contour?
+Doctor: Contour tiene flexibilidad superior para esa área, manteniendo expresiones naturales.
+Patient: ¿El DiamondGlow ayudaría con mis poros dilatados?
+Doctor: Sí, el DiamondGlow exfolia, extrae y aplica sueros específicos para refinar textura.
+Patient: ¿Cuándo podría hacer Ultherapy después de los rellenos?
+Doctor: Ultherapy requiere esperar seis semanas después de cualquier relleno dérmico para seguridad.

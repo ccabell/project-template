@@ -1,0 +1,106 @@
+name: Dev Env - Build and Deploy
+
+on:
+  push:
+    branches: [develop]
+  pull_request:
+    types: [opened, synchronize, reopened]
+  workflow_dispatch:
+
+env:
+  AWS_DEFAULT_REGION: us-east-1
+  ENVIRONMENT: dev
+  CDK_DEFAULT_ACCOUNT: '277707121008'
+  WORKING_DIRECTORY: infra
+
+jobs:
+  build:
+    if: ${{ github.event_name == 'push' || (github.event_name == 'pull_request' && (startsWith(github.head_ref, 'ADE-') || startsWith(github.head_ref, 'DSO-') || startsWith(github.head_ref, 'AIML-'))) }}
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - id: checkout
+        uses: actions/checkout@v4
+
+      - id: setup-qemu
+        uses: docker/setup-qemu-action@v3
+
+      - id: setup-buildx
+        uses: docker/setup-buildx-action@v3
+        with:
+          buildkitd-flags: --debug
+          driver-opts: |
+            image=moby/buildkit:latest
+            network=host
+
+      - id: setup-node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22.2.0'
+          cache: 'npm'
+          cache-dependency-path: '${{ env.WORKING_DIRECTORY }}/package-lock.json'
+
+      - id: setup-python
+        uses: actions/setup-python@v5
+        with:
+          python-version-file: "pyproject.toml"
+          cache-dependency-path: |
+            pyproject.toml
+            uv.lock
+          allow-prereleases: true
+          check-latest: true
+
+      - id: uv-install
+        uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+          cache-dependency-glob: "uv.lock"
+
+      - id: install-deps
+        run: |
+          uv venv
+          source .venv/bin/activate
+          uv sync --all-extras --dev
+          cd ${{ env.WORKING_DIRECTORY }} && npm ci
+
+      - id: run-tests
+        working-directory: ${{ env.WORKING_DIRECTORY }}
+        run: uv run pytest
+
+      - id: authenticate-oidc
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-region: ${{ env.AWS_DEFAULT_REGION }}
+          role-to-assume: arn:aws:iam::${{ env.CDK_DEFAULT_ACCOUNT }}:role/AWSGitHubOIDCAdministratorRole
+
+      - id: cdk-synth
+        working-directory: ${{ env.WORKING_DIRECTORY }}
+        env:
+          ENVIRONMENT: ${{ env.ENVIRONMENT }}
+        run: |
+          source ../.venv/bin/activate
+          npx cdk synth --context stage=${{ env.ENVIRONMENT }} \
+            --context account=${{ env.CDK_DEFAULT_ACCOUNT }}
+
+      - id: security-scan
+        working-directory: ${{ env.WORKING_DIRECTORY }}
+        run: |
+          if [ -f cdk.out/*NagReport.csv ]; then
+            cat cdk.out/*NagReport.csv
+            CRITICAL_ISSUES=$(grep -v "Suppressed" cdk.out/*NagReport.csv | grep -c "Error" || true)
+            if [ $CRITICAL_ISSUES -gt 0 ]; then
+              echo "Found $CRITICAL_ISSUES critical security issues"
+            else
+              echo "No critical security issues found"
+            fi
+          else
+            echo "No security report generated"
+          fi
+
+      - id: upload-artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: cdk.out
+          path: ${{ env.WORKING_DIRECTORY }}/cdk.out

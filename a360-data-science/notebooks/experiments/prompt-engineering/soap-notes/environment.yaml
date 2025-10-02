@@ -1,0 +1,14 @@
+name: soap-notes
+channels:
+  - conda-forge
+dependencies:
+  - boto3
+  - ipykernel
+  - ipywidgets
+  - mlflow
+  - numpy
+  - pandas
+  - python=3.12.9
+  - sagemaker-mlflow
+  - sagemaker-python-sdk
+prefix: /home/sagemaker-user/.conda/envs/soap-notes

@@ -17,14 +17,26 @@ This document describes the production-mirrored base project architecture design
 B360/
 ├── web-app/                           # Production: a360-web-app-develop
 ├── page-craft-bliss-forge-api/       # Production: optional integration
+├── a360-data-lake/                   # Production: data lake repository
+├── a360-data-science/                # Production: data science and MLOps
+├── a360-notes-ios/                   # Production: iOS notes application
+├── a360-transcription-service-evaluator/ # Production: transcription evaluator
 ├── [your-base-project]/              # Your new base project
 │   ├── production-repos/             # Symbolic links to production repos
 │   │   ├── a360-genai-platform-develop/  -> ../../mariadb-sync-project/a360-genai-platform-develop
 │   │   ├── a360-web-app-develop/         -> ../web-app
+│   │   ├── a360-data-lake/               -> ../a360-data-lake
+│   │   ├── a360-data-science/            -> ../a360-data-science
+│   │   ├── a360-notes-ios/               -> ../a360-notes-ios
+│   │   ├── a360-transcription-service-evaluator/ -> ../a360-transcription-service-evaluator
 │   │   └── page-craft-bliss-forge-api/   -> ../page-craft-bliss-forge-api
 │   ├── collaborator-snapshots/       # Safe copies for external developers
 │   │   ├── a360-genai-platform-develop/  # Clean snapshot (no .git, no secrets)
 │   │   ├── a360-web-app-develop/         # Clean snapshot
+│   │   ├── a360-data-lake/               # Clean snapshot
+│   │   ├── a360-data-science/            # Clean snapshot
+│   │   ├── a360-notes-ios/               # Clean snapshot
+│   │   ├── a360-transcription-service-evaluator/ # Clean snapshot
 │   │   └── COLLABORATOR_README.md
 │   ├── database-snapshots/           # Database exports for collaborators
 │   │   ├── latest/                   # Junction to most recent snapshot
@@ -156,7 +168,7 @@ gh repo create my-contribution-repo
 ```powershell
 # After adding functions to your profile
 nbp "a360-integration-base"                    # Basic base project
-nbp "a360-full-base" -IncludePageCraft         # With PageCraft API  
+nbp "a360-full-base" -IncludePageCraft         # With PageCraft API
 nbp "a360-base" -CreateGitHub -RunAsAdmin      # Full featured
 ```
 

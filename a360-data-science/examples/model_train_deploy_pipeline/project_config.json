@@ -1,0 +1,6 @@
+{
+  "MainStackName":"SMPipelineRootStack",
+  "SageMakerPipelineName": "model-train-deploy-pipeline",
+  "USE_AMT": "yes"
+}
+

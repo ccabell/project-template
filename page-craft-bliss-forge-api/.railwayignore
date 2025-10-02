@@ -1,0 +1,14 @@
+node_modules/
+.git/
+.env
+.env.local
+.env.example
+*.log
+logs/
+coverage/
+.nyc_output/
+dist/frontend/
+.DS_Store
+*.tgz
+*.tar.gz
+Thumbs.db

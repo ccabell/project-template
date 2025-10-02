@@ -1,0 +1,103 @@
+{
+  "consultation_mappings": {
+    "english": {
+      "consultation_01": [
+        {
+          "consultation_id": "e50128cc-369b-46fb-a603-7bfc1037bcc8",
+          "speech_to_text_model": "nova-3-medical",
+          "spellcheck_model": "claude-3-haiku"
+        },
+        {
+          "consultation_id": "d1bb6674-cdc9-4f71-aece-9bd40822f838",
+          "speech_to_text_model": "nova-3-general",
+          "spellcheck_model": "claude-3-haiku"
+        }
+      ],
+      "consultation_02": [
+        {
+          "consultation_id": "e0da611b-fd07-45c9-a798-4f94878d35e7",
+          "speech_to_text_model": "nova-3-medical",
+          "spellcheck_model": "claude-3-haiku"
+        },
+        {
+          "consultation_id": "4055dbd0-37cb-47b4-9481-7d85f6e71259",
+          "speech_to_text_model": "nova-3-general",
+          "spellcheck_model": "claude-3-haiku"
+        }
+      ],
+      "consultation_03": [
+        {
+          "consultation_id": "ea6b4e7a-f995-4a84-949b-aa265850f531",
+          "speech_to_text_model": "nova-3-medical",
+          "spellcheck_model": "claude-3-haiku"
+        },
+        {
+          "consultation_id": "4adda91d-0235-4bc0-b323-bd71c16e63ab",
+          "speech_to_text_model": "nova-3-general",
+          "spellcheck_model": "claude-3-haiku"
+        }
+      ],
+      "consultation_04": [
+        {
+          "consultation_id": "0d9e7a41-408b-4ef4-9e2a-dc0beda711de",
+          "speech_to_text_model": "nova-3-medical",
+          "spellcheck_model": "claude-3-haiku"
+        },
+        {
+          "consultation_id": "e397aa28-2bd4-4f7a-abcb-eca96b9c6fce",
+          "speech_to_text_model": "nova-3-general",
+          "spellcheck_model": "claude-3-haiku"
+        }
+      ],
+      "consultation_05": [
+        {
+          "consultation_id": "40d9c537-827d-484a-9cc3-b04716b8f223",
+          "speech_to_text_model": "nova-3-medical",
+          "spellcheck_model": "claude-3-haiku"
+        },
+        {
+          "consultation_id": "f1e0f412-4853-4a5e-90a1-77eeb70f09cf",
+          "speech_to_text_model": "nova-3-general",
+          "spellcheck_model": "claude-3-haiku"
+        }
+      ]
+    },
+    "spanish": {
+      "consultation_01": [
+        {
+          "consultation_id": "09aef3df-8802-4021-9505-400a53a8e45f",
+          "speech_to_text_model": "nova-3-medical",
+          "spellcheck_model": "claude-3-haiku"
+        }
+      ],
+      "consultation_02": [
+        {
+          "consultation_id": "a76ae5b7-84b1-4076-a257-3c7c28caad45",
+          "speech_to_text_model": "nova-3-medical",
+          "spellcheck_model": "claude-3-haiku"
+        }
+      ],
+      "consultation_03": [
+        {
+          "consultation_id": "be2a5fff-b504-4388-9523-2611243915e1",
+          "speech_to_text_model": "nova-3-medical",
+          "spellcheck_model": "claude-3-haiku"
+        }
+      ],
+      "consultation_04": [
+        {
+          "consultation_id": "de84d2c4-e307-4dba-81fb-2781d5f4f938",
+          "speech_to_text_model": "nova-3-medical",
+          "spellcheck_model": "claude-3-haiku"
+        }
+      ],
+      "consultation_05": [
+        {
+          "consultation_id": "7c628237-6805-433f-9753-d73b28cf47b4",
+          "speech_to_text_model": "nova-3-medical",
+          "spellcheck_model": "claude-3-haiku"
+        }
+      ]
+    }
+  }
+}

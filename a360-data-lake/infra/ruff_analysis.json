@@ -1,0 +1,368 @@
+[
+  {
+    "code": "ARG002",
+    "name": "unused-method-argument",
+    "count": 396,
+    "fixable": false
+  },
+  {
+    "code": "G004",
+    "name": "logging-f-string",
+    "count": 244,
+    "fixable": false
+  },
+  {
+    "code": "T201",
+    "name": "print",
+    "count": 172,
+    "fixable": false
+  },
+  {
+    "code": "S101",
+    "name": "assert",
+    "count": 122,
+    "fixable": false
+  },
+  {
+    "code": "FBT002",
+    "name": "boolean-default-value-positional-argument",
+    "count": 118,
+    "fixable": false
+  },
+  {
+    "code": "BLE001",
+    "name": "blind-except",
+    "count": 87,
+    "fixable": false
+  },
+  {
+    "code": "PLR2004",
+    "name": "magic-value-comparison",
+    "count": 79,
+    "fixable": false
+  },
+  {
+    "code": "TRY400",
+    "name": "error-instead-of-exception",
+    "count": 75,
+    "fixable": false
+  },
+  {
+    "code": "TRY300",
+    "name": "try-consider-else",
+    "count": 52,
+    "fixable": false
+  },
+  {
+    "code": "ARG005",
+    "name": "unused-lambda-argument",
+    "count": 46,
+    "fixable": false
+  },
+  {
+    "code": "ARG001",
+    "name": "unused-function-argument",
+    "count": 40,
+    "fixable": false
+  },
+  {
+    "code": "TRY003",
+    "name": "raise-vanilla-args",
+    "count": 28,
+    "fixable": false
+  },
+  {
+    "code": "PLR0913",
+    "name": "too-many-arguments",
+    "count": 26,
+    "fixable": false
+  },
+  {
+    "code": "TRY401",
+    "name": "verbose-log-message",
+    "count": 22,
+    "fixable": false
+  },
+  {
+    "code": "TRY301",
+    "name": "raise-within-try",
+    "count": 16,
+    "fixable": false
+  },
+  {
+    "code": "RUF002",
+    "name": "ambiguous-unicode-character-docstring",
+    "count": 15,
+    "fixable": false
+  },
+  {
+    "code": "W293",
+    "name": "blank-line-with-whitespace",
+    "count": 14,
+    "fixable": true
+  },
+  {
+    "code": "EM101",
+    "name": "raw-string-in-exception",
+    "count": 14,
+    "fixable": false
+  },
+  {
+    "code": "EM102",
+    "name": "f-string-in-exception",
+    "count": 14,
+    "fixable": false
+  },
+  {
+    "code": "PGH003",
+    "name": "blanket-type-ignore",
+    "count": 14,
+    "fixable": false
+  },
+  {
+    "code": "PLC0415",
+    "name": "import-outside-top-level",
+    "count": 12,
+    "fixable": false
+  },
+  {
+    "code": "W291",
+    "name": "trailing-whitespace",
+    "count": 10,
+    "fixable": true
+  },
+  {
+    "code": "PT018",
+    "name": "pytest-composite-assertion",
+    "count": 9,
+    "fixable": false
+  },
+  {
+    "code": "RET504",
+    "name": "unnecessary-assign",
+    "count": 9,
+    "fixable": false
+  },
+  {
+    "code": "FBT001",
+    "name": "boolean-type-hint-positional-argument",
+    "count": 8,
+    "fixable": false
+  },
+  {
+    "code": "B008",
+    "name": "function-call-in-default-argument",
+    "count": 7,
+    "fixable": false
+  },
+  {
+    "code": "PLR0915",
+    "name": "too-many-statements",
+    "count": 6,
+    "fixable": false
+  },
+  {
+    "code": "LOG015",
+    "name": "root-logger-call",
+    "count": 5,
+    "fixable": false
+  },
+  {
+    "code": "PERF401",
+    "name": "manual-list-comprehension",
+    "count": 4,
+    "fixable": false
+  },
+  {
+    "code": "S310",
+    "name": "suspicious-url-open-usage",
+    "count": 4,
+    "fixable": false
+  },
+  {
+    "code": "TRY201",
+    "name": "verbose-raise",
+    "count": 4,
+    "fixable": false
+  },
+  {
+    "code": "COM812",
+    "name": "missing-trailing-comma",
+    "count": 3,
+    "fixable": true
+  },
+  {
+    "code": "DTZ003",
+    "name": "call-datetime-utcnow",
+    "count": 3,
+    "fixable": false
+  },
+  {
+    "code": "PLW0603",
+    "name": "global-statement",
+    "count": 3,
+    "fixable": false
+  },
+  {
+    "code": "S324",
+    "name": "hashlib-insecure-hash-function",
+    "count": 3,
+    "fixable": false
+  },
+  {
+    "code": "SLF001",
+    "name": "private-member-access",
+    "count": 3,
+    "fixable": false
+  },
+  {
+    "code": "C401",
+    "name": "unnecessary-generator-set",
+    "count": 2,
+    "fixable": false
+  },
+  {
+    "code": "N999",
+    "name": "invalid-module-name",
+    "count": 2,
+    "fixable": false
+  },
+  {
+    "code": "PERF102",
+    "name": "incorrect-dict-iterator",
+    "count": 2,
+    "fixable": false
+  },
+  {
+    "code": "PTH123",
+    "name": "builtin-open",
+    "count": 2,
+    "fixable": false
+  },
+  {
+    "code": "RUF001",
+    "name": "ambiguous-unicode-character-string",
+    "count": 2,
+    "fixable": false
+  },
+  {
+    "code": "S110",
+    "name": "try-except-pass",
+    "count": 2,
+    "fixable": false
+  },
+  {
+    "code": "SIM105",
+    "name": "suppressible-exception",
+    "count": 2,
+    "fixable": false
+  },
+  {
+    "code": "SIM108",
+    "name": "if-else-block-instead-of-if-exp",
+    "count": 2,
+    "fixable": false
+  },
+  {
+    "code": "UP038",
+    "name": "non-pep604-isinstance",
+    "count": 2,
+    "fixable": false
+  },
+  {
+    "code": "E701",
+    "name": "multiple-statements-on-one-line-colon",
+    "count": 1,
+    "fixable": false
+  },
+  {
+    "code": "A002",
+    "name": "builtin-argument-shadowing",
+    "count": 1,
+    "fixable": false
+  },
+  {
+    "code": "B007",
+    "name": "unused-loop-control-variable",
+    "count": 1,
+    "fixable": false
+  },
+  {
+    "code": "ERA001",
+    "name": "commented-out-code",
+    "count": 1,
+    "fixable": false
+  },
+  {
+    "code": "FBT003",
+    "name": "boolean-positional-value-in-call",
+    "count": 1,
+    "fixable": false
+  },
+  {
+    "code": "I001",
+    "name": "unsorted-imports",
+    "count": 1,
+    "fixable": true
+  },
+  {
+    "code": "N806",
+    "name": "non-lowercase-variable-in-function",
+    "count": 1,
+    "fixable": false
+  },
+  {
+    "code": "PIE810",
+    "name": "multiple-starts-ends-with",
+    "count": 1,
+    "fixable": false
+  },
+  {
+    "code": "PLR0911",
+    "name": "too-many-return-statements",
+    "count": 1,
+    "fixable": false
+  },
+  {
+    "code": "PLR0912",
+    "name": "too-many-branches",
+    "count": 1,
+    "fixable": false
+  },
+  {
+    "code": "PT017",
+    "name": "pytest-assert-in-except",
+    "count": 1,
+    "fixable": false
+  },
+  {
+    "code": "PT019",
+    "name": "pytest-fixture-param-without-value",
+    "count": 1,
+    "fixable": false
+  },
+  {
+    "code": "RUF003",
+    "name": "ambiguous-unicode-character-comment",
+    "count": 1,
+    "fixable": false
+  },
+  {
+    "code": "S106",
+    "name": "hardcoded-password-func-arg",
+    "count": 1,
+    "fixable": false
+  },
+  {
+    "code": "S603",
+    "name": "subprocess-without-shell-equals-true",
+    "count": 1,
+    "fixable": false
+  },
+  {
+    "code": "TID252",
+    "name": "relative-imports",
+    "count": 1,
+    "fixable": false
+  }
+]

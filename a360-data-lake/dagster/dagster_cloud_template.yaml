@@ -1,0 +1,41 @@
+locations:
+  - location_name: podcast-transcription-pipeline-${ENVIRONMENT}
+    code_source:
+      package_name: repository
+    build:
+      directory: .
+      registry: ${AWS_ACCOUNT_ID}.dkr.ecr.us-east-1.amazonaws.com/dagster
+    working_directory: /opt/dagster/app
+    container_context:
+      ecs:
+        server_resources: # Resources for code servers launched by the agent for this location
+          cpu: "256"
+          memory: "512"
+          replica_count: 1
+        run_resources: # Resources for runs launched by the agent for this location
+          cpu: "512"
+          memory: "1024"
+        secrets_tags:
+          - dagster-${ENVIRONMENT}
+        env_vars:
+          - ENVIRONMENT=${ENVIRONMENT}
+  - location_name: consultation-transcripts-pipeline-${ENVIRONMENT}
+    code_source:
+      package_name: repository
+    build:
+      directory: .
+      registry: ${AWS_ACCOUNT_ID}.dkr.ecr.us-east-1.amazonaws.com/dagster
+    working_directory: /opt/dagster/app
+    container_context:
+      ecs:
+        server_resources: # Resources for code servers launched by the agent for this location
+          cpu: "512"
+          memory: "1024"
+          replica_count: 1
+        run_resources: # Resources for runs launched by the agent for this location
+          cpu: "1024"
+          memory: "2048"
+        secrets_tags:
+          - dagster-${ENVIRONMENT}
+        env_vars:
+          - ENVIRONMENT=${ENVIRONMENT}

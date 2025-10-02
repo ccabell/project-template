@@ -1,0 +1,35 @@
+[project]
+name = "a360-dagster"
+version = "0.0.1"
+requires-python = ">=3.12, <3.13"
+dependencies = [
+    "dagster==1.11.2",
+    "dagster-aws>=0.23.0,<1.0.0",
+    "dagster-cloud>=1.11.0,<2.0.0",
+    "dagster-webserver>=1.11.0,<2.0.0",
+    "lakefs-client>=1.0.0,<2.0.0",
+    "boto3>=1.26.0,<2.0.0",
+    "feedparser>=6.0.0,<7.0.0",
+    "deepgram-sdk>=4.0.0,<5.0.0",
+    "ffmpeg-python>=0.2.0,<1.0.0",
+    "pandas>=2.0.0,<3.0.0",
+    "pydantic>=2.0.0,<3.0.0",
+    "httpx>=0.24.0,<1.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "black",
+    "ruff",
+    "mypy",
+]
+
+[tool.dagster]
+module_name = "repository"
+code_location_name = "a360_dagster"
+
+[tool.ruff]
+line-length = 120
+target-version = "py312"
+

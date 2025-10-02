@@ -1,0 +1,237 @@
+name: Dagster Cloud Hybrid Deployment
+
+on:
+  push:
+    branches:
+      - main
+      - release
+      - develop
+  pull_request:
+    branches:
+      - main
+      - release
+      - develop
+    types: [opened, synchronize, reopened, closed]
+  workflow_dispatch:
+    inputs:
+      environment:
+        type: choice
+        required: true
+        description: Choose environment
+        default: 'dev'
+        options:
+          - dev
+          - staging
+          - prod
+
+concurrency:
+  group: ${{ github.ref }}-${{ github.event_name }}
+  cancel-in-progress: true
+
+env:
+  DAGSTER_CLOUD_ORGANIZATION: aesthetics360
+  DAGSTER_CLOUD_API_TOKEN: ${{ secrets.DAGSTER_CLOUD_API_TOKEN }}
+  DAGSTER_PROJECT_DIR: dagster
+  DAGSTER_CLOUD_YAML_PATH: dagster_cloud.yaml
+  AWS_REGION: us-east-1
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+permissions:
+  contents: read
+  id-token: write
+  pull-requests: write
+
+jobs:
+  dagster-cloud-deploy:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Pre-run checks
+        id: prerun
+        uses: dagster-io/dagster-cloud-action/actions/utils/prerun@v0.1
+
+      - name: Checkout
+        uses: actions/checkout@v4
+        if: steps.prerun.outputs.result != 'skip'
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+
+      - name: Set dynamic env vars
+        run: |
+          if [ -z "${{ inputs.environment || '' }}" ]; then
+            ENVIRONMENT="dev"
+            AWS_ACCOUNT_ID="277707121008"
+          # temp disable until setting up gitflow
+          # echo "Running dynamic branch-based environment setup..."
+
+          #  # Determine REF_BRANCH
+          #  if [ "${GITHUB_EVENT_NAME}" = "push" ]; then
+          #    REF_BRANCH="${GITHUB_REF_NAME}"
+          #  else
+          #    REF_BRANCH="${GITHUB_BASE_REF}"
+          #  fi
+          #  echo "REF_BRANCH=${REF_BRANCH}" >> $GITHUB_ENV
+
+          #  # Set ENVIRONMENT and AWS_ACCOUNT_ID based on branch
+          #  case "${REF_BRANCH}" in
+          #    develop)
+          #      ENVIRONMENT="dev"
+          #      AWS_ACCOUNT_ID="277707121008"
+          #      ;;
+          #    release)
+          #      ENVIRONMENT="staging"
+          #      AWS_ACCOUNT_ID="863518416131"
+          #      ;;
+          #    main)
+          #      ENVIRONMENT="prod"
+          #      AWS_ACCOUNT_ID="664418972896"
+          #      ;;
+          #    *)
+          #      ENVIRONMENT="dev"
+          #      AWS_ACCOUNT_ID="277707121008"
+          #      ;;
+          #  esac
+          else
+            echo "Using environment from workflow dispatch input: ${{ inputs.environment }}"
+            case "${{ inputs.environment }}" in
+              dev)
+                ENVIRONMENT="dev"
+                AWS_ACCOUNT_ID="277707121008"
+                ;;
+              staging)
+                ENVIRONMENT="staging"
+                AWS_ACCOUNT_ID="863518416131"
+                ;;
+              prod)
+                ENVIRONMENT="prod"
+                AWS_ACCOUNT_ID="664418972896"
+                ;;
+              *)
+                echo "Unknown environment input: ${{ inputs.environment }}"
+                exit 1
+                ;;
+            esac
+          fi
+
+          echo "AWS_ACCOUNT_ID=${AWS_ACCOUNT_ID}" >> $GITHUB_ENV
+          echo "ENVIRONMENT=${ENVIRONMENT}" >> $GITHUB_ENV
+          IMAGE_REGISTRY="${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/dagster"
+          echo "IMAGE_REGISTRY=${IMAGE_REGISTRY}" >> $GITHUB_ENV
+
+      - name: Substitute variables in dagster_cloud.yaml
+        run: |
+          envsubst < dagster/dagster_cloud_template.yaml > dagster/dagster_cloud.yaml
+
+      - name: Validate configuration
+        id: ci-validate
+        if: steps.prerun.outputs.result != 'skip'
+        uses: dagster-io/dagster-cloud-action/actions/utils/dagster-cloud-cli@v0.1
+        with:
+          command: "ci check --project-dir ${{ env.DAGSTER_PROJECT_DIR }} --dagster-cloud-yaml-path ${{ env.DAGSTER_CLOUD_YAML_PATH }}"
+
+      - name: Initialize build session
+        id: ci-init
+        if: steps.prerun.outputs.result != 'skip'
+        uses: dagster-io/dagster-cloud-action/actions/utils/ci-init@v0.1
+        with:
+          project_dir: ${{ env.DAGSTER_PROJECT_DIR }}
+          dagster_cloud_yaml_path: ${{ env.DAGSTER_CLOUD_YAML_PATH }}
+          deployment: prod
+
+      - name: Generate docker image tag
+        id: generate-image-tag
+        if: steps.prerun.outputs.result != 'skip'
+        run: echo "IMAGE_TAG=$GITHUB_SHA-$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT" >> $GITHUB_ENV && echo $IMAGE_TAG
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+        if: steps.prerun.outputs.result != 'skip'
+
+      - name: Configure AWS credentials
+        if: steps.prerun.outputs.result != 'skip'
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::${{ env.AWS_ACCOUNT_ID }}:role/AWSGitHubOIDCAdministratorRole
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Login to ECR
+        if: steps.prerun.outputs.result != 'skip'
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Set up QEMU
+        if: steps.prerun.outputs.result != 'skip'
+        uses: docker/setup-qemu-action@v3
+        with:
+          platforms: linux/amd64,linux/arm64
+
+      - name: Set up Docker Buildx
+        if: steps.prerun.outputs.result != 'skip'
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build and upload Docker image for data_pipelines
+        if: steps.prerun.outputs.result != 'skip'
+        uses: docker/build-push-action@v5
+        with:
+          context: "{{defaultContext}}:dagster"
+          file: Dockerfile
+          push: true
+          tags: ${{ env.IMAGE_REGISTRY }}:${{ env.IMAGE_TAG }}-data-pipelines
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          platforms: linux/amd64,linux/arm64
+
+      - name: Update build session with image tag for data_pipelines
+        id: ci-set-build-output-data-pipelines
+        if: steps.prerun.outputs.result != 'skip'
+        uses: dagster-io/dagster-cloud-action/actions/utils/dagster-cloud-cli@v0.1
+        with:
+          command: "ci set-build-output --location-name=podcast-transcription-pipeline-${{ env.ENVIRONMENT }} --image-tag=${{ env.IMAGE_TAG }}-data-pipelines"
+
+      - name: Set up QEMU
+        if: steps.prerun.outputs.result != 'skip'
+        uses: docker/setup-qemu-action@v3
+        with:
+          platforms: linux/amd64,linux/arm64
+
+      - name: Set up Docker Buildx
+        if: steps.prerun.outputs.result != 'skip'
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build and upload Docker image for consultation_pipelines
+        if: steps.prerun.outputs.result != 'skip'
+        uses: docker/build-push-action@v5
+        with:
+          context: "{{defaultContext}}:dagster"
+          file: Dockerfile
+          push: true
+          tags: ${{ env.IMAGE_REGISTRY }}:${{ env.IMAGE_TAG }}-consultation-transcripts-pipeline
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          platforms: linux/amd64,linux/arm64
+
+      - name: Update build session with image tag for consultation_pipelines
+        id: ci-set-build-output-consultation-transcripts-pipeline
+        if: steps.prerun.outputs.result != 'skip'
+        uses: dagster-io/dagster-cloud-action/actions/utils/dagster-cloud-cli@v0.1
+        with:
+          command: "ci set-build-output --location-name=consultation-transcripts-pipeline-${{ env.ENVIRONMENT }} --image-tag=${{ env.IMAGE_TAG }}-consultation-transcripts-pipeline"
+
+      - name: Deploy to Dagster Cloud
+        id: ci-deploy
+        if: steps.prerun.outputs.result != 'skip'
+        uses: dagster-io/dagster-cloud-action/actions/utils/dagster-cloud-cli@v0.1
+        with:
+          command: "ci deploy"
+
+      - name: Update PR comment for branch deployments
+        id: ci-notify
+        if: steps.prerun.outputs.result != 'skip' && always()
+        uses: dagster-io/dagster-cloud-action/actions/utils/dagster-cloud-cli@v0.1
+        with:
+          command: "ci notify --project-dir=${{ env.DAGSTER_PROJECT_DIR }}"
+
+      - name: Generate a summary
+        id: ci-summary
+        if: steps.prerun.outputs.result != 'skip' && always()
+        uses: dagster-io/dagster-cloud-action/actions/utils/dagster-cloud-cli@v0.1
+        with:
+          command: "ci status --output-format=markdown >> $GITHUB_STEP_SUMMARY"

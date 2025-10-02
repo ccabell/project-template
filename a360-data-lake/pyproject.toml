@@ -1,0 +1,152 @@
+[project]
+name = "a360-data-lake"
+version = "0.1.0"
+description = """
+A healthcare-optimized Apache Iceberg data lake built on AWS Modern Data Architecture (MDA) framework. 
+This architecture enables secure, scalable healthcare data processing with integrated AI/ML pipelines and robust governance controls. 
+Unstructured data for RAG and their respective preprocessing pipelines are housed here.
+"""
+authors = [
+    { name = "Shawn Albert", email = "shawn.albert@aesthetics360.com" }
+]
+readme = "README.md"
+requires-python = ">=3.12, <3.13"
+dependencies = [
+    "annotated-types==0.7.0",
+    "attrs==24.3.0",
+    "aws-cdk-asset-awscli-v1==2.2.220",
+    "aws-cdk-asset-kubectl-v20==2.1.3",
+    "aws-cdk-asset-node-proxy-agent-v6==2.1.0",
+    "aws-cdk-aws-glue-alpha==2.176.0a0",
+    "aws-cdk-cloud-assembly-schema==39.2.1",
+    "aws-cdk-lib==2.176.0",
+    "aws-xray-sdk>=2.14.0",
+    "aws-lambda-powertools>=2.30.0",
+    "boto3==1.36.4",
+    "botocore==1.36.4",
+    "cattrs==24.1.2",
+    "cdk-nag==2.34.23",
+    "constructs==10.4.2",
+    "importlib-resources==6.5.2",
+    "iniconfig==2.0.0",
+    "jmespath==1.0.1",
+    "jsii==1.106.0",
+    "packaging==24.2",
+    "pluggy==1.5.0",
+    "publication==0.0.3",
+    "pydantic==2.10.5",
+    "pydantic-core==2.27.2",
+    "pytest==8.3.4",
+    "python-dateutil==2.9.0.post0",
+    "s3transfer==0.11.1",
+    "six==1.17.0",
+    "typeguard==2.13.3",
+    "typing-extensions==4.12.2",
+    "urllib3==2.3.0",
+]
+keywords = ["data-lake", "data-engineering", "aws", "mda", "cdk"]
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = ["infra"]
+
+[dependency-groups]
+dev = [
+    "aws-cdk-lib>=2.176.0",
+    "aws-lambda-powertools>=2.30.0",
+    "constructs>=10.4.2",
+    "pytest>=8.3.4",
+    "pytest-cov>=6.2.1",
+    "pytest-mock>=3.14.1",
+    "ruff>=0.12.1",
+    "syrupy>=4.9.1",
+    "ty>=0.0.1a12",
+    "moto>=5.0.0",
+]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 88
+exclude = [
+    "cdk.out",
+    "*.egg-info",
+    ".venv",
+    "node_modules",
+]
+
+[tool.ruff.lint]
+# Core rules for LakeFS separation project
+select = [
+    "E", "W",      # pycodestyle errors and warnings
+    "F",           # pyflakes
+    "I",           # isort imports
+    "N",           # pep8-naming
+    "D",           # pydocstyle docstrings
+    "UP",          # pyupgrade
+    "B",           # flake8-bugbear
+    "C4",          # flake8-comprehensions
+    "SIM",         # flake8-simplify
+    "RUF",         # ruff-specific rules
+    "ANN",         # flake8-annotations
+    "S",           # flake8-bandit (security)
+    "ARG",         # flake8-unused-arguments
+    "PTH",         # flake8-use-pathlib
+]
+
+ignore = [
+    "E501",        # line too long (handled by formatter)
+    "E402",        # module level import not at top
+    "D100",        # missing docstring in public module
+    "D104",        # missing docstring in public package
+    "ANN101",      # missing type annotation for self
+    "ANN102",      # missing type annotation for cls
+    "S101",        # use of assert (common in tests)
+    "D203",        # 1 blank line required before class docstring
+    "D213",        # multi-line docstring summary should start at second line
+]
+
+# LakeFS-specific ignores
+extend-ignore = [
+    "TC002",       # typing-only imports
+    "INP001",      # implicit namespace packages
+    "S311",        # standard pseudo-random generators (acceptable for non-crypto use)
+]
+
+[tool.ruff.lint.per-file-ignores]
+"notebooks/*.ipynb" = ["E402", "D"]
+"infra/nul/asset.*/index.py" = ["S310", "D", "ANN"]  # Generated CDK asset bundles
+"infra/tests/**/*.py" = ["D", "S101", "ARG", "ANN"]  # Test files
+"infra/lakefs/**/*.py" = []  # Strict compliance for LakeFS code
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.ruff.lint.isort]
+known-first-party = ["stacks", "lakefs", "consultation_pipeline", "dagster"]
+section-order = ["future", "standard-library", "third-party", "first-party", "local-folder"]
+split-on-trailing-comma = true
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+line-ending = "auto"
+
+[tool.pytest.ini_options]
+testpaths = ["infra/tests"]
+pythonpath = ["infra"]
+addopts = "--tb=short"
+markers = [
+    "security: marks tests as security tests (pytest.mark.security)",
+    "compliance: marks tests as compliance tests (pytest.mark.compliance)", 
+    "integration: marks tests as integration tests (pytest.mark.integration)",
+    "slow: marks tests as slow running (pytest.mark.slow)",
+]
+filterwarnings = [
+    "ignore:datetime.datetime.utcnow\\(\\) is deprecated:DeprecationWarning",
+    "ignore:datetime.datetime.utcfromtimestamp\\(\\) is deprecated:DeprecationWarning",
+    "ignore:datetime.utcnow is deprecated:DeprecationWarning",
+    "ignore:No application metrics to publish:UserWarning",
+]

@@ -1,0 +1,88 @@
+disabled_rules: # rule identifiers to exclude from running
+  - missing_docs
+  - function_parameter_count
+  - trailing_whitespace
+  - inclusive_language
+  - void_function_in_ternary
+  - large_tuple
+opt_in_rules: # some rules are only opt-in
+  - empty_count
+  - force_unwrapping
+  - shorthand_optional_binding
+  - trailing_closure
+  - closure_spacing
+  - redundant_nil_coalescing
+  - explicit_init
+  - implicit_optional_initialization
+  - attributes
+  - modifier_order
+  - first_where
+  - unused_closure_parameter
+  - unused_control_flow_label
+  - unused_enumerated
+  - unused_optional_binding
+  - empty_string
+  - prefer_condition_list
+excluded: # paths to ignore during linting. Takes precedence over `included`.
+  - Carthage
+included:
+  - ../Project
+  - ../Sources
+#excluded:
+#  - Pods
+#  - Source/ExcludedFolder
+#  - Source/ExcludedFile.swift
+# configurable rules can be customized from this configuration file
+# binary rules can set their severity level
+force_cast: warning # implicitly
+force_unwrapping: warning # implicitly
+force_try:
+  severity: warning # explicitly
+# rules that have both warning and error levels, can set just the warning level
+# implicitly
+line_length: 510
+# they can set both implicitly with an array
+function_body_length:
+  - 100
+  - 150
+# or they can set both explicitly
+file_length:
+  warning: 400
+  error: 700
+# naming rules can set warnings/errors for min_length and max_length
+# additionally they can set excluded names
+type_name:
+  min_length: 2 # only warning
+  max_length: # warning and error
+    warning: 40
+    error: 50
+  excluded: iPhone # excluded via string
+identifier_name:
+  min_length: 2
+  max_length: # warning and error
+    warning: 40
+    error: 50
+cyclomatic_complexity:
+  ignores_case_statements: true
+  warning: 15
+  error: 20
+nesting:
+  type_level:
+    warning: 3
+    error: 6
+  function_level:
+    warning: 5
+    error: 10
+reporter: "xcode" # reporter type (xcode, json, csv, checkstyle)
+custom_rules:
+  restrict_cyrillic:
+    name: "Restrict Cyrillic Characters"
+    regex: "(?u)\\p{Script=Cyrillic}"
+    message: "Cyrillic characters prohibited."
+    severity: error
+  no_vertical_parameter_stack:
+    name: "No Vertical Parameter Stacking"
+    regex: "\\([\\s\\n]+[^)]*\\n[^)]*\\)"
+    included: ".*\\.swift"
+    message: "Multi-parameter initializers/functions must use a single horizontal line."
+    severity: warning

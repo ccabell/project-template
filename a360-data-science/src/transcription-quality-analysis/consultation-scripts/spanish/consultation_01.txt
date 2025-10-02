@@ -1,0 +1,11 @@
+Doctor: Vamos a comenzar con NEOCUTIS Bio Serum Firm para estimular la producción de colágeno en su rostro.
+Patient: Perfecto. ¿El Juvederm Voluma sería mejor que Radiesse para mis mejillas?
+Doctor: Voluma dura entre dieciocho a veinticuatro meses, mientras que Radiesse estimula colágeno natural.
+Patient: Entiendo. ¿Qué opina sobre Dysport para mis líneas glabelares?
+Doctor: Dysport funciona muy bien, especialmente para líneas de expresión moderadas a severas.
+Patient: ¿Puedo combinar el tratamiento con HydraFacial la misma semana?
+Doctor: Recomiendo esperar cuarenta y ocho horas entre tratamientos para evitar irritación.
+Patient: ¿Y para las patas de gallo necesitaría Botox o prefiere Xeomin?
+Doctor: Ambos son efectivos, pero Xeomin no tiene proteínas complejas que puedan causar resistencia.
+Patient: Excelente. ¿Cuándo podemos programar el Morpheus8 para mi cuello?
+Doctor: Después del Radiesse, esperaremos cuatro semanas para el tratamiento con radiofrecuencia.

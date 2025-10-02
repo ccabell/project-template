@@ -1,0 +1,13 @@
+Doctor: Para sus líneas de expresión profundas, recomiendo comenzar con Jeuveau en área glabellar.
+Patient: ¿Jeuveau es diferente a Dysport o tienen efectos similares?
+Doctor: Ambos son neurotoxinas tipo A, pero Jeuveau tiene formulación más purificada.
+Patient: ¿El Profound RF sería efectivo para la flacidez en mi papada?
+Doctor: Profound RF es excelente para reafirmar tejidos profundos con radiofrecuencia microneedling.
+Patient: ¿Revanesse Lips+ duraría más que otros rellenos labiales?
+Doctor: Revanesse dura entre seis a dieciocho meses, similar a otros ácidos hialurónicos.
+Patient: Para el melasma, ¿prefiere IPL o mejor NEOCUTIS Perle?
+Doctor: Combinaremos IPL para fotofacial con NEOCUTIS Perle para blanqueamiento tópico.
+Patient: ¿El CO2RE láser sería muy agresivo para mi tipo de piel?
+Doctor: CO2RE tiene configuraciones ajustables, podemos usar parámetros suaves inicialmente.
+Patient: ¿Cuándo podría programar el BBL para mis manchas?
+Doctor: Broad Band Light será ideal después de completar el tratamiento tópico blanqueador.

@@ -29,6 +29,26 @@ $MainRepos = @{
         "description" = "A360 Web Application Development Repository" 
         "type" = "core"
     }
+    "a360-data-lake" = @{
+        "source" = "$B360Path\a360-data-lake"
+        "description" = "A360 Data Lake Repository"
+        "type" = "core"
+    }
+    "a360-data-science" = @{
+        "source" = "$B360Path\a360-data-science"
+        "description" = "A360 Data Science and MLOps Repository"
+        "type" = "core"
+    }
+    "a360-notes-ios" = @{
+        "source" = "$B360Path\a360-notes-ios"
+        "description" = "A360 iOS Notes Application Repository"
+        "type" = "core"
+    }
+    "a360-transcription-service-evaluator" = @{
+        "source" = "$B360Path\a360-transcription-service-evaluator"
+        "description" = "A360 Transcription Service Evaluator Repository"
+        "type" = "core"
+    }
     "page-craft-bliss-forge-api" = @{
         "source" = "$B360Path\page-craft-bliss-forge-api"
         "description" = "Page Craft Bliss Forge API (Optional)"
@@ -62,7 +82,8 @@ foreach ($repo in $MainRepos.Keys) {
     $repoInfo = $MainRepos[$repo]
     $symLinkPath = Join-Path "$BaseProjectPath\production-repos" $repo
     
-    if ($repoInfo.type -eq "core" -or ($repoInfo.type -eq "optional" -and $IncludePageCraft)) {
+    if ($repoInfo.type -eq "core" -or 
+        ($repoInfo.type -eq "optional" -and $IncludePageCraft -and $repo -eq "page-craft-bliss-forge-api")) {
         if (Test-Path $repoInfo.source) {
             Write-Host "  Creating symlink: $repo -> $($repoInfo.source)" -ForegroundColor Cyan
             
@@ -131,6 +152,24 @@ foreach (`$repo in `$ReposToSync) {
     
     if (Test-Path `$prodPath) {
         Write-Host "Syncing `$repo..." -ForegroundColor Yellow
+        
+        # Pull latest changes from production repository first
+        if (Test-Path "`$prodPath\.git") {
+            Write-Host "  Pulling latest changes from remote..." -ForegroundColor Cyan
+            Push-Location `$prodPath
+            try {
+                git fetch origin
+                git pull origin main
+                Write-Host "  ✓ Repository updated" -ForegroundColor Green
+            }
+            catch {
+                Write-Host "  ⚠ Warning: Could not pull latest changes: `$(`$_.Exception.Message)" -ForegroundColor Yellow
+                Write-Host "    Continuing with current local state..." -ForegroundColor Yellow
+            }
+            finally {
+                Pop-Location
+            }
+        }
         
         # Remove existing snapshot
         if (Test-Path `$snapshotPath) {

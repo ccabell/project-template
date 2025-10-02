@@ -1,0 +1,20 @@
+
+# dagster.yaml configuration for LakeFS integration
+
+resources:
+  lakefs:
+    config:
+      lakefs_url: "http://localhost:8000"
+      access_key: "YOUR_LAKEFS_ACCESS_KEY"  # Replace with actual key
+      secret_key: "YOUR_LAKEFS_SECRET_KEY"  # Replace with actual key
+
+# Run configuration example
+run_config:
+  resources:
+    lakefs:
+      config:
+        lakefs_url: "http://localhost:8000"
+        access_key: 
+          env: LAKEFS_ACCESS_KEY
+        secret_key:
+          env: LAKEFS_SECRET_KEY

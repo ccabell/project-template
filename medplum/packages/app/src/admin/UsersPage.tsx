@@ -1,0 +1,18 @@
+// SPDX-FileCopyrightText: Copyright Orangebot, Inc. and Medplum contributors
+// SPDX-License-Identifier: Apache-2.0
+import { Group, Title } from '@mantine/core';
+import { MedplumLink } from '@medplum/react';
+import { JSX } from 'react';
+import { MemberTable } from './MembersTable';
+
+export function UsersPage(): JSX.Element {
+  return (
+    <>
+      <Title>Users</Title>
+      <MemberTable resourceType="Practitioner" fields={['user', 'profile', 'admin', '_lastUpdated']} />
+      <Group justify="flex-end">
+        <MedplumLink to={`/admin/invite`}>Invite new user</MedplumLink>
+      </Group>
+    </>
+  );
+}

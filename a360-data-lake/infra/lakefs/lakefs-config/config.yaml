@@ -1,0 +1,34 @@
+---
+database:
+  type: postgres
+  postgres:
+    connection_string: "postgres://lakefs_admin:password123@postgres:5432/lakefs?sslmode=disable"
+
+blockstore:
+  type: s3
+  s3:
+    endpoint: "http://minio:9000"
+    force_path_style: true
+    discover_bucket_region: false
+    region: us-east-1
+    disable_ssl: true
+
+auth:
+  authenticate:
+    create_user: true
+  api:
+    skip_health_check: true
+  ui_config:
+    rbac: simplified
+  encrypt:
+    secret_key: some-random-secret-key-for-local-testing
+
+logging:
+  level: INFO
+
+listen_address: "0.0.0.0:8000"
+
+setup:
+  initial_admin:
+    username: admin
+    password: admin123

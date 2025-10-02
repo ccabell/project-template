@@ -1,0 +1,9 @@
+{
+  "A360TranscriptionEvaluator-dev": {
+    "ApiGatewayUrl": "https://cvxw9vxbse.execute-api.us-east-1.amazonaws.com/dev/",
+    "CognitoUserPoolId": "us-east-1_O6Ib3izRC",
+    "S3BucketName": "a360transcriptionevaluator-dev-frontend-471112502741",
+    "FrontendUrl": "https://d2r3bbmuqex63a.cloudfront.net",
+    "DatabaseEndpoint": "a360transcriptionevaluator-databasecluster68fc2945-vjrs38hpksy8.cluster-cdc0k2mwam4o.us-east-1.rds.amazonaws.com"
+  }
+}

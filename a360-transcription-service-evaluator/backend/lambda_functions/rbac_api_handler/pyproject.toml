@@ -1,0 +1,20 @@
+[project]
+name = "rbac-api-handler"
+version = "0.1.0"
+description = "Lambda function for RBAC-enabled API handling"
+requires-python = ">=3.12"
+dependencies = [
+    "pycognito>=2024.5.1",
+    "sqlalchemy>=2.0.0",
+    "psycopg2-binary>=2.9.0",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["."]
+
+[dependency-groups]
+dev = []

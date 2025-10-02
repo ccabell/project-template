@@ -1,0 +1,3 @@
+-c ../../../common/constraints.txt
+# boto3 and botocore provided by Lambda runtime and constrained by constraints.txt
+# aws-lambda-powertools provided via Powertools layer

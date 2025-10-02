@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 920" width="1200" height="920">
+  <!-- Background -->
+  <rect width="1200" height="920" fill="#f1f5f9" />
+  
+  <!-- Title -->
+  <text x="600" y="40" font-family="Arial, sans-serif" font-size="24" text-anchor="middle" fill="#0f172a" font-weight="bold">Medical Domain Data Architecture</text>
+  
+  <!-- External Data Sources Section -->
+  <rect x="30" y="80" width="160" height="350" rx="5" ry="5" fill="#e2e8f0" stroke="#475569" stroke-width="2" />
+  <text x="110" y="105" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="#334155" font-weight="bold">External Data Sources</text>
+  
+  <!-- PDF Source -->
+  <rect x="40" y="120" width="140" height="60" rx="3" ry="3" fill="#f8fafc" stroke="#64748b" stroke-width="1" />
+  <text x="110" y="145" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#334155">Medical PDFs</text>
+  <text x="110" y="165" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#64748b">Textbooks, Research</text>
+  
+  <!-- PubMed Source -->
+  <rect x="40" y="190" width="140" height="60" rx="3" ry="3" fill="#f8fafc" stroke="#64748b" stroke-width="1" />
+  <text x="110" y="215" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#334155">PubMed Articles</text>
+  <text x="110" y="235" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#64748b">Medical Research</text>
+  
+  <!-- Google Drive Source -->
+  <rect x="40" y="260" width="140" height="45" rx="3" ry="3" fill="#f8fafc" stroke="#64748b" stroke-width="1" />
+  <text x="110" y="285" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#334155">Google Drive</text>
+  
+  <!-- Dropbox Source -->
+  <rect x="40" y="315" width="140" height="45" rx="3" ry="3" fill="#f8fafc" stroke="#64748b" stroke-width="1" />
+  <text x="110" y="340" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#334155">Dropbox</text>
+  
+  <!-- Patient Intake Forms -->
+  <rect x="40" y="370" width="140" height="45" rx="3" ry="3" fill="#f8fafc" stroke="#64748b" stroke-width="1" />
+  <text x="110" y="395" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#334155">Patient Intake Forms</text>
+  
+  <!-- Public Data Sources -->
+  <rect x="40" y="425" width="140" height="45" rx="3" ry="3" fill="#f8fafc" stroke="#64748b" stroke-width="1" />
+  <text x="110" y="450" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#334155">YouTube & Podcasts</text>
+  
+  <!-- Ingestion Layer -->
+  <rect x="230" y="80" width="160" height="350" rx="5" ry="5" fill="#bfdbfe" stroke="#2563eb" stroke-width="2" />
+  <text x="310" y="105" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="#1e40af" font-weight="bold">Ingestion Layer</text>
+  
+  <rect x="240" y="120" width="140" height="300" rx="3" ry="3" fill="#eff6ff" stroke="#3b82f6" stroke-width="1" />
+  <text x="310" y="140" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#1e40af">Data Connectors</text>
+  <text x="310" y="160" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#3b82f6">• S3 Direct Upload</text>
+  <text x="310" y="180" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#3b82f6">• PDF Document Loader</text>
+  <text x="310" y="200" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#3b82f6">• PubMed API</text>
+  <text x="310" y="220" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#3b82f6">• Dropbox Integration</text>
+  <text x="310" y="240" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#3b82f6">• Google Drive</text>
+  <text x="310" y="260" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#3b82f6">• YouTube API</text>
+  <text x="310" y="280" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#3b82f6">• Podcast RSS Feeds</text>
+  <text x="310" y="300" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#1e40af">Validation</text>
+  <text x="310" y="320" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#3b82f6">• Format Verification</text>
+  <text x="310" y="340" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#3b82f6">• Metadata Extraction</text>
+  <text x="310" y="360" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#3b82f6">• Ingestion Logging</text>
+  <text x="310" y="380" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#3b82f6">• Initial Quality Checks</text>
+  
+  <!-- S3 Data Lake Container - Expanded with more symmetrical spacing -->
+  <rect x="430" y="80" width="460" height="440" rx="5" ry="5" fill="#f0fff4" stroke="#22543d" stroke-width="2" />
+  <text x="660" y="105" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="#22543d" font-weight="bold">S3 Data Lake</text>
+  
+  <!-- Raw Zone -->
+  <rect x="450" y="120" width="140" height="380" rx="5" ry="5" fill="#dcfce7" stroke="#16a34a" stroke-width="2" />
+  <text x="520" y="140" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#166534" font-weight="bold">Raw Zone</text>
+  
+  <rect x="460" y="160" width="120" height="320" rx="3" ry="3" fill="#f0fdf4" stroke="#22c55e" stroke-width="1" />
+  <text x="520" y="180" font-family="Arial, sans-serif" font-size="13" text-anchor="middle" fill="#166534">Original Data</text>
+  <text x="520" y="200" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#16a34a">• Medical PDFs</text>
+  <text x="520" y="220" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#16a34a">• PubMed XML/JSON</text>
+  <text x="520" y="240" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#16a34a">• Google Drive Files</text>
+  <text x="520" y="260" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#16a34a">• Dropbox Documents</text>
+  <text x="520" y="280" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#16a34a">• Patient Forms</text>
+  <text x="520" y="300" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#16a34a">• YouTube Transcripts</text>
+  <text x="520" y="320" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#16a34a">• Podcast Audio/Text</text>
+  <text x="520" y="340" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#16a34a">• Source Metadata</text>
+  
+  <text x="520" y="370" font-family="Arial, sans-serif" font-size="13" text-anchor="middle" fill="#166534">Organization</text>
+  <text x="520" y="390" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#16a34a">• By Source/Date</text>
+  <text x="520" y="410" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#16a34a">• By Document Type</text>
+  
+  <text x="520" y="440" font-family="Arial, sans-serif" font-size="13" text-anchor="middle" fill="#166534">Retention</text>
+  <text x="520" y="460" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#16a34a">• Full Retention</text>
+  <text x="520" y="480" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#16a34a">• Infrequent Access (1yr)</text>
+  
+  <!-- Stage Zone -->
+  <rect x="600" y="120" width="140" height="380" rx="5" ry="5" fill="#fef3c7" stroke="#d97706" stroke-width="2" />
+  <text x="670" y="140" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#92400e" font-weight="bold">Stage Zone</text>
+  
+  <rect x="610" y="160" width="120" height="320" rx="3" ry="3" fill="#fffbeb" stroke="#f59e0b" stroke-width="1" />
+  <text x="670" y="180" font-family="Arial, sans-serif" font-size="13" text-anchor="middle" fill="#92400e">Standardized Formats</text>
+  <text x="670" y="200" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#d97706">• Extracted Text</text>
+  <text x="670" y="220" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#d97706">• Cleaned PubMed</text>
+  <text x="670" y="240" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#d97706">• Structured Documents</text>
+  <text x="670" y="260" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#d97706">• Enhanced Metadata</text>
+  <text x="670" y="280" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#d97706">• Audio Transcriptions</text>
+  <text x="670" y="300" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#d97706">• Video Metadata</text>
+  
+  <text x="670" y="330" font-family="Arial, sans-serif" font-size="13" text-anchor="middle" fill="#92400e">Source Data Catalog</text>
+  <text x="670" y="350" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#d97706">• AWS Glue Tables</text>
+  <text x="670" y="370" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#d97706">• Source-to-Stage Mapping</text>
+  
+  <text x="670" y="400" font-family="Arial, sans-serif" font-size="13" text-anchor="middle" fill="#92400e">Data Quality</text>
+  <text x="670" y="420" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#d97706">• Validation Records</text>
+  <text x="670" y="440" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#d97706">• Completeness Metrics</text>
+  <text x="670" y="460" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#d97706">• Mid-stage Lineage</text>
+  
+  <!-- Analytics Zone -->
+  <rect x="750" y="120" width="140" height="380" rx="5" ry="5" fill="#fee2e2" stroke="#dc2626" stroke-width="2" />
+  <text x="820" y="140" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#b91c1c" font-weight="bold">Analytics Zone</text>
+  
+  <rect x="760" y="160" width="120" height="200" rx="3" ry="3" fill="#fef2f2" stroke="#ef4444" stroke-width="1" />
+  <text x="820" y="180" font-family="Arial, sans-serif" font-size="13" text-anchor="middle" fill="#b91c1c">AI-Ready Data</text>
+  <text x="820" y="200" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#dc2626">• RAG-Ready Data</text>
+  <text x="820" y="220" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#dc2626">• Medical Knowledge</text>
+  <text x="820" y="240" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#dc2626">• Analytics Results</text>
+  <text x="820" y="260" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#dc2626">• Preprocessed Files</text>
+  <text x="820" y="280" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#dc2626">  for Vectorization</text>
+  <text x="820" y="300" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#dc2626">• Bedrock Function</text>
+  <text x="820" y="320" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#dc2626">  Call Inputs</text>
+  <text x="820" y="340" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#dc2626">• Structured Clinical</text>
+  
+  <!-- LLM Fine-Tuning Data (highlighted) -->
+  <rect x="760" y="370" width="120" height="60" rx="3" ry="3" fill="#fef2f2" stroke="#ef4444" stroke-width="2" stroke-dasharray="5,2" />
+  <text x="820" y="390" font-family="Arial, sans-serif" font-size="13" text-anchor="middle" fill="#b91c1c" font-weight="bold">LLM Fine-Tuning</text>
+  <text x="820" y="410" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#dc2626">• Domain Corpus</text>
+  <text x="820" y="425" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#dc2626">• Training Samples</text>
+  
+  <!-- Data Governance - Horizontal Box spanning the width -->
+  <rect x="30" y="530" width="860" height="140" rx="5" ry="5" fill="#99f6e4" stroke="#0d9488" stroke-width="2" />
+  <text x="110" y="555" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="#0f766e" font-weight="bold">Data Governance</text>
+  
+  <!-- DataChain Logo -->
+  <text x="770" y="555" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="#0f766e" font-weight="bold">DataChain</text>
+  
+  <!-- Security Section -->
+  <rect x="40" y="575" width="205" height="85" rx="3" ry="3" fill="#ccfbf1" stroke="#14b8a6" stroke-width="1" />
+  <text x="140" y="595" font-family="Arial, sans-serif" font-size="13" text-anchor="middle" fill="#0f766e">Security & Access</text>
+  <text x="140" y="615" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#0d9488">• IAM & Bucket Policies</text>
+  <text x="140" y="630" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#0d9488">• Encryption</text>
+  <text x="140" y="645" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#0d9488">• Medical Data Controls</text>
+  
+  <!-- Compliance Section -->
+  <rect x="255" y="575" width="205" height="85" rx="3" ry="3" fill="#ccfbf1" stroke="#14b8a6" stroke-width="1" />
+  <text x="355" y="595" font-family="Arial, sans-serif" font-size="13" text-anchor="middle" fill="#0f766e">Audit & Compliance</text>
+  <text x="355" y="615" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#0d9488">• CloudTrail & S3 Logs</text>
+  <text x="355" y="630" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#0d9488">• Compliance Checks</text>
+  <text x="355" y="645" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#0d9488">• HIPAA Controls</text>
+  
+  <!-- Data Management Section -->
+  <rect x="470" y="575" width="205" height="85" rx="3" ry="3" fill="#ccfbf1" stroke="#14b8a6" stroke-width="1" />
+  <text x="570" y="595" font-family="Arial, sans-serif" font-size="13" text-anchor="middle" fill="#0f766e">Data Management</text>
+  <text x="570" y="615" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#0d9488">• AWS Glue Catalog</text>
+  <text x="570" y="630" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#0d9488">• Custom Lineage</text>
+  <text x="570" y="645" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#0d9488">• Retention Policies</text>
+  
+  <!-- DataChain Version Control -->
+  <rect x="685" y="575" width="205" height="85" rx="3" ry="3" fill="#ccfbf1" stroke="#14b8a6" stroke-width="1" />
+  <text x="785" y="595" font-family="Arial, sans-serif" font-size="13" text-anchor="middle" fill="#0f766e">DataChain Capabilities</text>
+  <text x="785" y="615" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#0d9488">• Multimodal Dataset Versioning</text>
+  <text x="785" y="630" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#0d9488">• Data Enrichment & Processing</text>
+  <text x="785" y="645" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#0d9488">• Python-friendly Version Control</text>
+  
+  <!-- Dagster Orchestration -->
+  <rect x="230" y="380" width="160" height="140" rx="5" ry="5" fill="#e2e8f0" stroke="#475569" stroke-width="2" />
+  <text x="310" y="405" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="#334155" font-weight="bold">Version Control</text>
+  
+  <rect x="240" y="425" width="140" height="85" rx="3" ry="3" fill="#f8fafc" stroke="#64748b" stroke-width="1" />
+  <text x="310" y="445" font-family="Arial, sans-serif" font-size="13" text-anchor="middle" fill="#334155">GitHub Repository</text>
+  <text x="310" y="465" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#64748b">• Infrastructure as Code</text>
+  <text x="310" y="480" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#64748b">• Dagster Pipelines</text>
+  <text x="310" y="495" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#64748b">• DataChain Integration</text>
+  
+  <!-- Dagster Orchestration -->
+  <rect x="30" y="680" width="860" height="170" rx="5" ry="5" fill="#f3e8ff" stroke="#7e22ce" stroke-width="2" />
+  <text x="460" y="705" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="#7e22ce" font-weight="bold">Dagster Orchestration</text>
+  
+  <rect x="50" y="725" width="250" height="105" rx="3" ry="3" fill="#faf5ff" stroke="#a855f7" stroke-width="1" />
+  <text x="175" y="745" font-family="Arial, sans-serif" font-size="13" text-anchor="middle" fill="#7e22ce">Pipeline Management</text>
+  <text x="175" y="765" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#9333ea">• Asset-Based Pipelines</text>
+  <text x="175" y="780" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#9333ea">• Scheduled Jobs</text>
+  <text x="175" y="795" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#9333ea">• Event Triggers</text>
+  <text x="175" y="810" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#9333ea">• Pipes External Execution</text>
+  
+  <rect x="335" y="725" width="250" height="105" rx="3" ry="3" fill="#faf5ff" stroke="#a855f7" stroke-width="1" />
+  <text x="460" y="745" font-family="Arial, sans-serif" font-size="13" text-anchor="middle" fill="#7e22ce">Lambda Processors</text>
+  <text x="460" y="765" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#9333ea">• PDF Text Extraction</text>
+  <text x="460" y="780" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#9333ea">• Medical Term Extraction</text>
+  <text x="460" y="795" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#9333ea">• Data Chunking for LLMs</text>
+  <text x="460" y="810" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#9333ea">• Bedrock Automation</text>
+  
+  <rect x="620" y="725" width="250" height="105" rx="3" ry="3" fill="#faf5ff" stroke="#a855f7" stroke-width="1" />
+  <text x="745" y="745" font-family="Arial, sans-serif" font-size="13" text-anchor="middle" fill="#7e22ce">Observability</text>
+  <text x="745" y="765" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#9333ea">• Pipeline Monitoring</text>
+  <text x="745" y="780" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#9333ea">• Data Quality Checks</text>
+  <text x="745" y="795" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#9333ea">• CloudWatch Integration</text>
+  <text x="745" y="810" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#9333ea">• Alerting (SNS)</text>
+  
+  <!-- AI Applications Section -->
+  <rect x="930" y="80" width="240" height="770" rx="5" ry="5" fill="#ddd6fe" stroke="#7c3aed" stroke-width="2" />
+  <text x="1050" y="105" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="#5b21b6" font-weight="bold">AI Applications & Outputs</text>
+  
+  <!-- Vector Database / Knowledge Base -->
+  <rect x="950" y="125" width="200" height="130" rx="3" ry="3" fill="#ede9fe" stroke="#8b5cf6" stroke-width="1" />
+  <text x="1050" y="145" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#5b21b6" font-weight="bold">Vector Database</text>
+  <text x="1050" y="165" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#6d28d9">(Knowledge Base)</text>
+  <text x="1050" y="190" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#7c3aed">• Medical Domain Content</text>
+  <text x="1050" y="205" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#7c3aed">• Semantic Search Capability</text>
+  <text x="1050" y="220" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#7c3aed">• Document Embeddings</text>
+  <text x="1050" y="235" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#7c3aed">• Context Retrieval</text>
+  
+  <!-- AI Models -->
+  <rect x="950" y="265" width="200" height="130" rx="3" ry="3" fill="#ede9fe" stroke="#8b5cf6" stroke-width="1" />
+  <text x="1050" y="285" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#5b21b6" font-weight="bold">AI Models</text>
+  
+  <rect x="960" y="300" width="85" height="85" rx="2" ry="2" fill="#f5f3ff" stroke="#8b5cf6" stroke-width="1" stroke-dasharray="4,2" />
+  <text x="1003" y="320" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#6d28d9">Fine-tuned Models</text>
+  <text x="1003" y="340" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#7c3aed">Aesthetic Medicine</text>
+  <text x="1003" y="355" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#7c3aed">Specialized</text>
+  <text x="1003" y="370" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#7c3aed">Terminology</text>
+  
+  <rect x="1055" y="300" width="85" height="85" rx="2" ry="2" fill="#f5f3ff" stroke="#8b5cf6" stroke-width="1" />
+  <text x="1098" y="320" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#6d28d9">RAG-Enabled</text>
+  <text x="1098" y="340" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#7c3aed">Knowledge Base</text>
+  <text x="1098" y="355" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#7c3aed">Integration for</text>
+  <text x="1098" y="370" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#7c3aed">Consultations</text>
+  
+  <!-- Data Services - Changed to DynamoDB -->
+  <rect x="950" y="405" width="200" height="110" rx="3" ry="3" fill="#ede9fe" stroke="#8b5cf6" stroke-width="1" />
+  <text x="1050" y="425" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#5b21b6" font-weight="bold">Data Services</text>
+  
+  <rect x="960" y="445" width="180" height="60" rx="2" ry="2" fill="#f5f3ff" stroke="#8b5cf6" stroke-width="1" />
+  <text x="1050" y="465" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#6d28d9">DynamoDB</text>
+  <text x="1050" y="485" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#7c3aed">• RAG Metadata Storage</text>
+  <text x="1050" y="500" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#7c3aed">• Clinical Data Relations</text>
+  
+  <!-- RAG Applications -->
+  <rect x="950" y="525" width="200" height="130" rx="3" ry="3" fill="#ede9fe" stroke="#8b5cf6" stroke-width="1" />
+  <text x="1050" y="545" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#5b21b6" font-weight="bold">Consultation Agents</text>
+  
+  <rect x="960" y="565" width="85" height="80" rx="2" ry="2" fill="#f5f3ff" stroke="#8b5cf6" stroke-width="1" />
+  <text x="1003" y="585" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#6d28d9">Injection Planning</text>
+  <text x="1003" y="600" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#7c3aed">Agent</text>
+  <text x="1003" y="615" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#7c3aed">Treatment</text>
+  <text x="1003" y="630" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#7c3aed">Recommendations</text>
+  
+  <rect x="1055" y="565" width="85" height="80" rx="2" ry="2" fill="#f5f3ff" stroke="#8b5cf6" stroke-width="1" />
+  <text x="1098" y="585" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#6d28d9">Laser Settings</text>
+  <text x="1098" y="600" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#7c3aed">Agent</text>```
+  <text x="1098" y="615" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#7c3aed">Protocol</text>
+  <text x="1098" y="630" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#7c3aed">Optimization</text>
+  
+  <!-- Patient Applications -->
+  <rect x="950" y="665" width="200" height="130" rx="3" ry="3" fill="#ede9fe" stroke="#8b5cf6" stroke-width="1" />
+  <text x="1050" y="685" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#5b21b6" font-weight="bold">Patient Applications</text>
+  
+  <rect x="960" y="705" width="180" height="80" rx="2" ry="2" fill="#f5f3ff" stroke="#8b5cf6" stroke-width="1" />
+  <text x="1050" y="725" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#6d28d9">Medical Education Bot</text>
+  <text x="1050" y="745" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#7c3aed">• Procedure Explanations</text>
+  <text x="1050" y="760" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#7c3aed">• Aftercare Instructions</text>
+  <text x="1050" y="775" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#7c3aed">• FAQ & Treatment Details</text>
+  
+  <!-- Flow Arrows - With Process Labels -->
+  
+  <!-- External Data to Ingestion -->
+  <path d="M190 150 L230 150" fill="none" stroke="#475569" stroke-width="1.5" marker-end="url(#arrowhead)" />
+  <path d="M190 220 L230 220" fill="none" stroke="#475569" stroke-width="1.5" marker-end="url(#arrowhead)" />
+  <path d="M190 285 L230 285" fill="none" stroke="#475569" stroke-width="1.5" marker-end="url(#arrowhead)" />
+  <path d="M190 340 L230 340" fill="none" stroke="#475569" stroke-width="1.5" marker-end="url(#arrowhead)" />
+  <path d="M190 395 L230 395" fill="none" stroke="#475569" stroke-width="1.5" marker-end="url(#arrowhead)" />
+  <path d="M190 450 L230 450" fill="none" stroke="#475569" stroke-width="1.5" marker-end="url(#arrowhead)" />
+  
+  <!-- Ingestion to Raw -->
+  <path d="M390 220 L450 220" fill="none" stroke="#475569" stroke-width="1.5" marker-end="url(#arrowhead)" />
+  <text x="420" y="210" font-family="Arial, sans-serif" font-size="11" fill="#475569" text-anchor="middle">Store</text>
+  
+  <!-- Raw to Stage -->
+  <path d="M590 220 L600 220" fill="none" stroke="#475569" stroke-width="1.5" marker-end="url(#arrowhead)" />
+  <text x="595" y="210" font-family="Arial, sans-serif" font-size="11" fill="#475569" text-anchor="middle">Standardize Format</text>
+  
+  <!-- Stage to Analytics -->
+  <path d="M740 220 L750 220" fill="none" stroke="#475569" stroke-width="1.5" marker-end="url(#arrowhead)" />
+  <text x="745" y="210" font-family="Arial, sans-serif" font-size="11" fill="#475569" text-anchor="middle">Preprocess</text>
+  
+  <!-- Analytics to Vector DB -->
+  <path d="M890 190 L950 190" fill="none" stroke="#475569" stroke-width="1.5" marker-end="url(#arrowhead)" />
+  <text x="920" y="180" font-family="Arial, sans-serif" font-size="11" fill="#475569" text-anchor="middle">RAG Data</text>
+  
+  <!-- LLM Fine-Tuning to AI Models -->
+  <path d="M890 370 L960 340" fill="none" stroke="#e11d48" stroke-width="1.5" marker-end="url(#arrowhead)" stroke-dasharray="5,2" />
+  <text x="915" y="345" font-family="Arial, sans-serif" font-size="11" fill="#e11d48" text-anchor="middle">Fine-Tune</text>
+  
+  <!-- GitHub to Orchestration -->
+  <path d="M310 480 L310 680" fill="none" stroke="#475569" stroke-width="1.5" marker-end="url(#arrowhead)" />
+  <text x="330" y="600" font-family="Arial, sans-serif" font-size="11" fill="#475569" text-anchor="middle">Deploy</text>
+  
+  <!-- Orchestration to Data Zones -->
+  <path d="M350 725 L520 500" fill="none" stroke="#475569" stroke-width="1.5" marker-end="url(#arrowhead)" />
+  <text x="410" y="600" font-family="Arial, sans-serif" font-size="11" fill="#475569" text-anchor="middle">Manage</text>
+  
+  <path d="M560 725 L670 500" fill="none" stroke="#475569" stroke-width="1.5" marker-end="url(#arrowhead)" />
+  <text x="590" y="600" font-family="Arial, sans-serif" font-size="11" fill="#475569" text-anchor="middle">Transform</text>
+  
+  <path d="M770 725 L820 500" fill="none" stroke="#475569" stroke-width="1.5" marker-end="url(#arrowhead)" />
+  <text x="780" y="600" font-family="Arial, sans-serif" font-size="11" fill="#475569" text-anchor="middle">Prepare</text>
+  
+  <!-- Vector DB to RAG Applications -->
+  <path d="M1050 255 L1050 405" fill="none" stroke="#475569" stroke-width="1.5" marker-end="url(#arrowhead)" />
+  <text x="1075" y="330" font-family="Arial, sans-serif" font-size="11" fill="#475569" text-anchor="middle">Integrate</text>
+  
+  <!-- Data Services to RAG Applications -->
+  <path d="M1050 505 L1050 525" fill="none" stroke="#475569" stroke-width="1.5" marker-end="url(#arrowhead)" />
+  <text x="1075" y="515" font-family="Arial, sans-serif" font-size="11" fill="#475569" text-anchor="middle">Context</text>
+  
+  <!-- RAG Applications to Patient Applications -->
+  <path d="M1050 655 L1050 665" fill="none" stroke="#475569" stroke-width="1.5" marker-end="url(#arrowhead)" />
+  <text x="1075" y="660" font-family="Arial, sans-serif" font-size="11" fill="#475569" text-anchor="middle">Medical Info</text>
+  
+  <!-- Arrow marker definition -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#475569" />
+    </marker>
+  </defs>
+  
+  <!-- Legend -->
+  <rect x="30" y="860" width="870" height="40" rx="5" ry="5" fill="#f1f5f9" stroke="#475569" stroke-width="1" />
+  
+  <rect x="40" y="870" width="15" height="15" fill="#dcfce7" stroke="#16a34a" stroke-width="1" />
+  <text x="65" y="882" font-family="Arial, sans-serif" font-size="11" fill="#334155" text-anchor="start">Raw Zone</text>
+  
+  <rect x="130" y="870" width="15" height="15" fill="#fef3c7" stroke="#d97706" stroke-width="1" />
+  <text x="155" y="882" font-family="Arial, sans-serif" font-size="11" fill="#334155" text-anchor="start">Stage Zone</text>
+  
+  <rect x="220" y="870" width="15" height="15" fill="#fee2e2" stroke="#dc2626" stroke-width="1" />
+  <text x="245" y="882" font-family="Arial, sans-serif" font-size="11" fill="#334155" text-anchor="start">Analytics Zone</text>
+  
+  <rect x="310" y="870" width="15" height="15" fill="#ddd6fe" stroke="#7c3aed" stroke-width="1" />
+  <text x="335" y="882" font-family="Arial, sans-serif" font-size="11" fill="#334155" text-anchor="start">AI/ML Zone</text>
+  
+  <rect x="400" y="870" width="15" height="15" fill="#99f6e4" stroke="#0d9488" stroke-width="1" />
+  <text x="425" y="882" font-family="Arial, sans-serif" font-size="11" fill="#334155" text-anchor="start">Data Governance</text>
+  
+  <line x1="500" y1="877" x2="515" y2="877" stroke="#475569" stroke-width="1.5" marker-end="url(#arrowhead)" />
+  <text x="535" y="882" font-family="Arial, sans-serif" font-size="11" fill="#334155" text-anchor="start">Process Flow</text>
+  
+  <rect x="600" y="870" width="15" height="15" fill="#f3e8ff" stroke="#7e22ce" stroke-width="1" />
+  <text x="625" y="882" font-family="Arial, sans-serif" font-size="11" fill="#334155" text-anchor="start">Orchestration</text>
+  
+  <rect x="700" y="870" width="15" height="15" fill="#ccfbf1" stroke="#14b8a6" stroke-width="1" />
+  <text x="725" y="882" font-family="Arial, sans-serif" font-size="11" fill="#334155" text-anchor="start">DataChain</text>
+  
+  <line x1="800" y1="877" x2="815" y2="877" stroke="#e11d48" stroke-width="1.5" marker-end="url(#arrowhead)" stroke-dasharray="5,2" />
+  <text x="835" y="882" font-family="Arial, sans-serif" font-size="11" fill="#334155" text-anchor="start">Fine-Tuning Flow</text>
+</svg>

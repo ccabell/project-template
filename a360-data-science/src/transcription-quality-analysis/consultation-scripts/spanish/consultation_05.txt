@@ -1,0 +1,15 @@
+Doctor: Para rejuvenecer su décolleté, combinaremos Clear + Brilliant con NEOCUTIS Neo Therapy.
+Patient: ¿Clear + Brilliant es menos agresivo que otros láseres fraccionados?
+Doctor: Exactamente, Clear + Brilliant ofrece resultados graduales sin tiempo de inactividad significativo.
+Patient: ¿El PicoSure sería efectivo para mis manchas de edad?
+Doctor: PicoSure picosegundo láser fragmenta pigmento eficientemente, ideal para lesiones benignas.
+Patient: ¿Emface realmente reemplaza los procedimientos quirúrgicos?
+Doctor: Emface combina radiofrecuencia con HIFEM para reafirmar sin cirugía, resultados naturales.
+Patient: ¿Vollure duraría más en surcos nasolabiales que Volbella?
+Doctor: Vollure está formulado específicamente para pliegues moderados, durabilidad superior.
+Patient: ¿El Thermage requiere anestesia para el procedimiento?
+Doctor: Thermage puede ser incómodo, aplicamos anestesia tópica y enfriamiento durante tratamiento.
+Patient: ¿La subcision ayudaría con mis cicatrices deprimidas?
+Doctor: La subcision rompe fibrosis subcutánea, liberando cicatrices adheridas para mejorar contorno.
+Patient: ¿Cuándo podré usar tranexamic acid después del peeling TCA?
+Doctor: El ácido tranexámico puede iniciarse una semana post-peeling para prevenir hiperpigmentación.

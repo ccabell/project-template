@@ -1,0 +1,13 @@
+# Centralized AWS Lambda dependency constraints
+# Use compatible-release pins to ensure stability while allowing minor updates
+
+# AWS SDK
+boto3~=1.34.0
+botocore~=1.34.0
+
+# Common Lambda dependencies
+requests~=2.31.0
+urllib3~=2.2.0
+
+# Note: aws-lambda-powertools is provided via AWS Powertools Lambda Layer
+# and should NOT be included in individual lambda requirements.txt files
