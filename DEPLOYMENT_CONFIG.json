@@ -1,0 +1,118 @@
+{
+  "streamlit_cloud_config": {
+    "app_url": "https://ib8imbfngdgvpaj6xgnqup.streamlit.app/",
+    "repository": "ccabell/project-template",
+    "branch": "b360-main",
+    "main_file": "web_app.py",
+    "deployment_method": "auto",
+    "status": "working",
+    "last_successful_deploy": "2025-10-03T23:05:00Z",
+    "python_version": "3.13.7"
+  },
+  
+  "file_structure": {
+    "development_file": "app.py",
+    "deployment_file": "web_app.py", 
+    "backup_deployment": "streamlit_app.py",
+    "advanced_version": "main_app.py",
+    "requirements": "requirements.txt",
+    "secrets": ".streamlit/secrets.toml",
+    "config": ".streamlit/config.toml"
+  },
+  
+  "git_configuration": {
+    "working_branch": "b360-main",
+    "backup_branch": "main",
+    "development_branch": "b360-main",
+    "deployment_remote": "origin",
+    "repository_url": "https://github.com/ccabell/project-template.git"
+  },
+  
+  "deployment_process": {
+    "step_1": "Edit app.py locally",
+    "step_2": "Test with 'streamlit run app.py'",
+    "step_3": "Run deploy_app.bat script OR manual sync",
+    "step_4": "Wait 30-60 seconds for auto-deploy",
+    "step_5": "Verify at app URL"
+  },
+  
+  "dependencies": {
+    "streamlit": "1.50.0",
+    "supabase": "2.21.1", 
+    "pandas": "2.3.3",
+    "python-dateutil": "2.9.0.post0",
+    "additional_packages": "auto-installed by streamlit cloud"
+  },
+  
+  "app_features": {
+    "authentication": "demo_mode_enabled",
+    "projects": [
+      {
+        "name": "Synthetic Transcript Generator",
+        "type": "transcript_generator", 
+        "status": "fully_functional",
+        "features": ["specialty_selection", "complexity_controls", "download_capability"]
+      },
+      {
+        "name": "Prompt Testing Sandbox",
+        "type": "prompt_tester",
+        "status": "fully_functional", 
+        "features": ["file_upload_simulation", "prompt_library", "test_execution", "results_dashboard"]
+      },
+      {
+        "name": "Transcript Analysis Dashboard", 
+        "type": "transcript_analyzer",
+        "status": "fully_functional",
+        "features": ["bulk_analysis", "search_filtering", "export_options", "multi_transcript_processing"]
+      }
+    ]
+  },
+  
+  "troubleshooting": {
+    "common_issues": [
+      {
+        "issue": "Site shows old content",
+        "solution": "Run deploy_app.bat or manually sync web_app.py"
+      },
+      {
+        "issue": "File not found error", 
+        "solution": "Ensure on b360-main branch and web_app.py exists"
+      },
+      {
+        "issue": "App won't load",
+        "solution": "Check Streamlit Cloud logs in Manage app interface"
+      }
+    ]
+  },
+  
+  "backup_commands": {
+    "quick_deploy": "deploy_app.bat",
+    "manual_sync": "cp app.py web_app.py && git add web_app.py && git commit -m 'Update deployment' && git push origin b360-main",
+    "revert_deploy": "git checkout HEAD~1 web_app.py && git commit -m 'Revert deployment' && git push origin b360-main",
+    "emergency_restore": "git checkout main && cp app.py web_app.py && git checkout b360-main && git add web_app.py && git commit -m 'Emergency restore' && git push origin b360-main"
+  },
+  
+  "success_indicators": [
+    "App loads without errors",
+    "Demo mode button works immediately", 
+    "Dashboard shows metrics and cards",
+    "All three projects have interactive demos",
+    "File operations work (upload/download)",
+    "Navigation between pages functions",
+    "Session state persists properly"
+  ],
+  
+  "maintenance": {
+    "regular_checks": "Verify app.py and web_app.py stay in sync",
+    "backup_frequency": "Before major changes", 
+    "update_process": "Always test locally before deploying",
+    "rollback_plan": "Use git history to revert problematic deployments"
+  },
+  
+  "contact_info": {
+    "last_working_config": "2025-10-03T23:05:00Z",
+    "configuration_by": "Warp AI Assistant",
+    "next_review": "Before major feature additions",
+    "documentation_location": "STREAMLIT_DEPLOYMENT.md"
+  }
+}
