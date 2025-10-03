@@ -14,8 +14,10 @@
     "API documentation structure",
     "Collaboration-ready documentation",
     "Multi-language support (Node.js/Python)",
+    "PageCraft API integration (optional)",
     "Security best practices",
-    "Testing setup"
+    "Testing setup",
+    "Production mirror base project support"
   ],
   "collaboration": {
     "public_docs": true,
@@ -23,6 +25,11 @@
     "reference_database": {
       "development_only": true,
       "production_warning": "Reference database not available in production"
+    },
+    "pagecraft_integration": {
+      "available": true,
+      "optional": true,
+      "description": "Web publishing and content management integration"
     }
   },
   "structure": {

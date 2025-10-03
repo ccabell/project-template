@@ -1,0 +1,45 @@
+{
+  "pagecraft": {
+    "enabled": true,
+    "api_base_url": "${PAGECRAFT_API_URL}",
+    "api_key": "${PAGECRAFT_API_KEY}",
+    "integration_type": "full",
+    "description": "Integration with page-craft-bliss-forge-api system",
+    "version": "1.0.0"
+  },
+  "endpoints": {
+    "health": "/api/pagecraft/health",
+    "content": "/api/pagecraft/content",
+    "templates": "/api/pagecraft/templates",
+    "publish": "/api/pagecraft/publish",
+    "projects": "/api/pagecraft/projects",
+    "auth": "/api/pagecraft/auth"
+  },
+  "permissions": {
+    "read": true,
+    "write": true,
+    "publish": true,
+    "admin": false,
+    "create_projects": true,
+    "delete_projects": false
+  },
+  "publishing": {
+    "auto_publish": false,
+    "publish_on_commit": false,
+    "staging_url": "${PAGECRAFT_STAGING_URL}",
+    "production_url": "${PAGECRAFT_PRODUCTION_URL}",
+    "webhook_notifications": true
+  },
+  "content_management": {
+    "allow_draft_mode": true,
+    "version_control": true,
+    "backup_before_publish": true,
+    "content_validation": true
+  },
+  "security": {
+    "require_authentication": true,
+    "api_rate_limit": 1000,
+    "allowed_origins": ["localhost", "127.0.0.1"],
+    "cors_enabled": true
+  }
+}

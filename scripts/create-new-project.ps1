@@ -33,7 +33,10 @@ param(
     [switch]$IncludeReferenceDatabase,
     
     [Parameter(Mandatory=$false)]
-    [switch]$IncludePageCraftAccess
+    [switch]$IncludePageCraftAccess,
+    
+    [Parameter(Mandatory=$false)]
+    [switch]$CreateBaseProject
 )
 
 # Template source directory (where this script is located)
@@ -58,8 +61,18 @@ if (-not $IncludeReferenceDatabase -and -not $PSBoundParameters.ContainsKey('Inc
 if (-not $IncludePageCraftAccess -and -not $PSBoundParameters.ContainsKey('IncludePageCraftAccess')) {
     Write-Host "`n🎨 PageCraft Integration" -ForegroundColor Yellow
     Write-Host "Would you like to include access to the page-craft-bliss-forge-api project?" -ForegroundColor White
+    Write-Host "   This adds API integration capabilities for the PageCraft system" -ForegroundColor Gray
     $pageCraftChoice = Read-Host "Include PageCraft access? (y/N)"
     $IncludePageCraftAccess = ($pageCraftChoice -eq "y" -or $pageCraftChoice -eq "Y")
+}
+
+# Rule 3: Ask about base project creation
+if (-not $CreateBaseProject -and -not $PSBoundParameters.ContainsKey('CreateBaseProject')) {
+    Write-Host "`n🏗️  Base Project Creation" -ForegroundColor Yellow
+    Write-Host "Would you like to create this as a production mirror base project?" -ForegroundColor White
+    Write-Host "   This creates symlinks to production repositories for direct development" -ForegroundColor Gray
+    $baseChoice = Read-Host "Create as base project? (y/N)"
+    $CreateBaseProject = ($baseChoice -eq "y" -or $baseChoice -eq "Y")
 }
 
 # Check if project directory already exists
@@ -212,7 +225,71 @@ if __name__ == "__main__":
 "@ | Set-Content "$NewProjectPath\src\main.py"
 }
 
+# Add PageCraft configuration if included
+if ($IncludePageCraftAccess) {
+    Write-Host "Adding PageCraft integration..." -ForegroundColor Yellow
+    
+    # Create PageCraft configuration file
+    @"
+{
+  "pagecraft": {
+    "enabled": true,
+    "api_base_url": "\${PAGECRAFT_API_URL}",
+    "api_key": "\${PAGECRAFT_API_KEY}",
+    "integration_type": "full",
+    "description": "Integration with page-craft-bliss-forge-api system"
+  },
+  "endpoints": {
+    "health": "/api/pagecraft/health",
+    "content": "/api/pagecraft/content",
+    "templates": "/api/pagecraft/templates",
+    "publish": "/api/pagecraft/publish"
+  },
+  "permissions": {
+    "read": true,
+    "write": true,
+    "publish": true,
+    "admin": false
+  }
+}
+"@ | Set-Content "$NewProjectPath\config\pagecraft.json"
+    
+    # Add PageCraft environment variables to .env.example
+    Add-Content "$NewProjectPath\.env.example" "
+# PageCraft Integration
+PAGECRAFT_API_URL=http://localhost:8080/api
+PAGECRAFT_API_KEY=your_pagecraft_api_key
+PAGECRAFT_ENABLED=true"
+}
+
+# Create base project if requested
+if ($CreateBaseProject) {
+    Write-Host "Creating as production mirror base project..." -ForegroundColor Yellow
+    $baseScript = Join-Path (Split-Path $TemplateDir -Parent) "scripts\create-production-mirror-base.ps1"
+    if (Test-Path $baseScript) {
+        & $baseScript -BaseProjectName $ProjectName -ProjectDescription $ProjectDescription -IncludePageCraft:$IncludePageCraftAccess
+        Write-Host "Base project created with production repository integration" -ForegroundColor Green
+        return
+    } else {
+        Write-Host "Warning: Base project script not found, continuing with regular project creation" -ForegroundColor Yellow
+    }
+}
+
 # Update project.json with current information
+$features = @(
+    "GitHub integration",
+    "Database configuration with development reference",
+    "Environment-based configuration", 
+    "API documentation structure",
+    "Collaboration-ready documentation",
+    "Security best practices",
+    "Testing setup"
+)
+
+if ($IncludePageCraftAccess) {
+    $features += "PageCraft API integration"
+}
+
 $projectConfig = @{
     template = @{
         name = "Collaborative Project Template"
@@ -227,16 +304,9 @@ $projectConfig = @{
         description = $ProjectDescription
         created = (Get-Date -Format "yyyy-MM-dd")
         language = if ($Python) { "python" } else { "nodejs" }
+        pagecraft_integration = $IncludePageCraftAccess
     }
-    features = @(
-        "GitHub integration",
-        "Database configuration with development reference",
-        "Environment-based configuration", 
-        "API documentation structure",
-        "Collaboration-ready documentation",
-        "Security best practices",
-        "Testing setup"
-    )
+    features = $features
 } | ConvertTo-Json -Depth 10
 
 Set-Content "$NewProjectPath\project.json" $projectConfig
