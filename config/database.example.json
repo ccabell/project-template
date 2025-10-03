@@ -1,0 +1,41 @@
+{
+  "development": {
+    "reference_database": {
+      "note": "DEVELOPMENT REFERENCE ONLY - This database contains sample data for development",
+      "warning": "DO NOT USE IN PRODUCTION - This is a reference database only",
+      "host": "pma.nextnlp.com",
+      "type": "mysql/mariadb",
+      "access": "via phpMyAdmin",
+      "description": "Contains raw reference data for development and testing purposes"
+    },
+    "local_database": {
+      "host": "localhost",
+      "port": 3306,
+      "database": "project_dev",
+      "username": "${DB_USERNAME}",
+      "password": "${DB_PASSWORD}",
+      "type": "mysql"
+    }
+  },
+  "production": {
+    "database": {
+      "host": "${PROD_DB_HOST}",
+      "port": "${PROD_DB_PORT}",
+      "database": "${PROD_DB_NAME}",
+      "username": "${PROD_DB_USERNAME}",
+      "password": "${PROD_DB_PASSWORD}",
+      "ssl": true,
+      "type": "mysql"
+    }
+  },
+  "test": {
+    "database": {
+      "host": "localhost",
+      "port": 3306,
+      "database": "project_test",
+      "username": "${TEST_DB_USERNAME}",
+      "password": "${TEST_DB_PASSWORD}",
+      "type": "mysql"
+    }
+  }
+}
