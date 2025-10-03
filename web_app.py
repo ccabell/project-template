@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import streamlit as st
 from datetime import datetime
 import json
@@ -5,7 +6,7 @@ import json
 # Page configuration
 st.set_page_config(
     page_title="A360 Internal Project Hub",
-    page_icon="🏢",
+    page_icon="",
     layout="wide",
     initial_sidebar_state="expanded"
 )
@@ -32,10 +33,10 @@ def logout_user():
 
 # Authentication UI
 def show_auth():
-    st.title("🏢 A360 Internal Project Hub")
+    st.title(" A360 Internal Project Hub")
     st.markdown("### Welcome to your internal project management system")
     
-    st.info("🎆 **DEMO MODE** - Enter any email and password to explore the system!")
+    st.info(" **DEMO MODE** - Enter any email and password to explore the system!")
     
     tab1, tab2 = st.tabs(["Login", "Quick Demo"])
     
@@ -58,16 +59,16 @@ def show_auth():
         
         col1, col2, col3 = st.columns(3)
         with col1:
-            st.markdown("🎯 **Project 1**\nTranscript Generator")
+            st.markdown(" **Project 1**\nTranscript Generator")
         with col2:
-            st.markdown("🧪 **Project 2**\nPrompt Testing Tool")
+            st.markdown(" **Project 2**\nPrompt Testing Tool")
         with col3:
-            st.markdown("🔍 **Project 3**\nTranscript Analysis")
+            st.markdown(" **Project 3**\nTranscript Analysis")
         
         if st.button("Enter Demo Mode", type="primary", key="demo_btn"):
             st.session_state.logged_in = True
             st.session_state.user_email = "demo@a360.com"
-            st.success("🎆 Welcome to A360 Project Hub Demo!")
+            st.success(" Welcome to A360 Project Hub Demo!")
             st.rerun()
 
 # Main application UI
@@ -100,9 +101,9 @@ def show_main_app():
 
 # Dashboard page
 def show_dashboard():
-    st.title("📊 A360 Project Hub Dashboard")
+    st.title(" A360 Project Hub Dashboard")
     
-    st.success("🎆 Welcome to the A360 Internal Project Hub! This is a fully functional demo of all three main projects.")
+    st.success(" Welcome to the A360 Internal Project Hub! This is a fully functional demo of all three main projects.")
     
     # Display demo metrics
     col1, col2, col3, col4 = st.columns(4)
@@ -135,37 +136,37 @@ def show_dashboard():
                 st.markdown(f"**{project['name']}**")
                 st.caption(f"Type: {project['type']} | Status: {project['status']}")
                 if st.button(f"Explore {project['name']}", key=f"explore_{i}"):
-                    st.info(f"🎯 {project['name']} - Full interactive demo available in the Projects tab!")
+                    st.info(f" {project['name']} - Full interactive demo available in the Projects tab!")
     
     with col2:
         st.subheader("System Status")
-        st.success("✅ User Interface - Fully Operational")
-        st.success("✅ Authentication - Working")
-        st.success("✅ Project Demos - All Active")
-        st.info("ℹ️ Database Integration - Ready for Setup")
+        st.success(" User Interface - Fully Operational")
+        st.success(" Authentication - Working")
+        st.success(" Project Demos - All Active")
+        st.info(" Database Integration - Ready for Setup")
         
         st.markdown("### Demo Features:")
-        st.markdown("• Interactive transcript generation")
-        st.markdown("• Prompt testing with sample data")
-        st.markdown("• Analysis dashboard with examples")
-        st.markdown("• Full user interface preview")
+        st.markdown(" Interactive transcript generation")
+        st.markdown(" Prompt testing with sample data")
+        st.markdown(" Analysis dashboard with examples")
+        st.markdown(" Full user interface preview")
 
 # Projects page - Interactive Demos
 def show_projects():
-    st.title("📍 A360 Project Hub - Three Main Projects")
+    st.title(" A360 Project Hub - Three Main Projects")
     
     st.markdown("### Complete interactive demonstrations of all three projects:")
     
     # Project 1 Demo
-    with st.expander("🎯 Project 1: Synthetic Transcript Generator", expanded=True):
+    with st.expander(" Project 1: Synthetic Transcript Generator", expanded=True):
         show_transcript_generator_demo()
     
     # Project 2 Demo  
-    with st.expander("🧪 Project 2: Prompt Testing Sandbox"):
+    with st.expander(" Project 2: Prompt Testing Sandbox"):
         show_prompt_tester_demo()
     
     # Project 3 Demo
-    with st.expander("🔍 Project 3: Transcript Analysis Dashboard"):
+    with st.expander(" Project 3: Transcript Analysis Dashboard"):
         show_analysis_demo()
 
 def show_transcript_generator_demo():
@@ -208,11 +209,11 @@ Focus Areas: {', '.join(focus_areas) if focus_areas else 'Standard consultation'
 Generation completed with {complexity}/5 complexity level.
 """
         
-        st.success("✅ Demo transcript generated!")
+        st.success(" Demo transcript generated!")
         st.text_area("Generated Content", demo_transcript, height=250, key="gen_output")
         
         st.download_button(
-            "📄 Download Demo Transcript",
+            " Download Demo Transcript",
             demo_transcript,
             file_name=f"demo_{specialty}_{datetime.now().strftime('%Y%m%d_%H%M%S')}.txt",
             mime="text/plain",
@@ -258,23 +259,23 @@ Execution Time: 2.1 seconds | Model: Demo-GPT-4
 ANALYSIS OUTPUT:
 Based on the {selected_transcript}, here are the key findings:
 
-• Patient demonstrated typical consultation behavior for this specialty
-• Clear communication between provider and patient
-• Treatment options thoroughly discussed
-• Follow-up instructions provided
-• No significant risk factors identified
+ Patient demonstrated typical consultation behavior for this specialty
+ Clear communication between provider and patient
+ Treatment options thoroughly discussed
+ Follow-up instructions provided
+ No significant risk factors identified
 
 PERFORMANCE METRICS:
-• Processing Time: 2.1s
-• Tokens Used: 245
-• Confidence Score: 94%
-• Analysis Depth: High
+ Processing Time: 2.1s
+ Tokens Used: 245
+ Confidence Score: 94%
+ Analysis Depth: High
 
 This demonstrates the prompt testing system's capabilities.
 Full version includes real AI analysis and detailed performance tracking.
 """
         
-        st.success("✅ Demo test completed!")
+        st.success(" Demo test completed!")
         st.text_area("Test Results", demo_result, height=300, key="test_output")
 
 def show_analysis_demo():
@@ -326,20 +327,20 @@ Transcripts Analyzed: {len(selected_transcripts)}
 Analysis Date: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
 
 SUMMARY FINDINGS:
-• Found {len(selected_transcripts) * 4} relevant mentions across selected files
-• Common themes: patient care, treatment planning, consultation protocols
-• Average confidence score: 91%
-• Analysis completed in 3.2 seconds
+ Found {len(selected_transcripts) * 4} relevant mentions across selected files
+ Common themes: patient care, treatment planning, consultation protocols
+ Average confidence score: 91%
+ Analysis completed in 3.2 seconds
 
 INDIVIDUAL RESULTS:
 """
             
             for i, transcript in enumerate(selected_transcripts):
-                analysis_result += f"\n{i+1}. {transcript}:\n   • 4 relevant matches found\n   • Key themes extracted\n   • High confidence analysis\n   • Export ready"
+                analysis_result += f"\n{i+1}. {transcript}:\n    4 relevant matches found\n    Key themes extracted\n    High confidence analysis\n    Export ready"
             
-            analysis_result += f"\n\nEXPORT OPTIONS:\n• JSON: Full detailed results with metadata\n• CSV: Summary table with key metrics\n• Excel: Formatted report with charts\n\nThis demonstrates the bulk analysis capabilities of the system.\n"
+            analysis_result += f"\n\nEXPORT OPTIONS:\n JSON: Full detailed results with metadata\n CSV: Summary table with key metrics\n Excel: Formatted report with charts\n\nThis demonstrates the bulk analysis capabilities of the system.\n"
         
-        st.success("✅ Demo analysis completed!")
+        st.success(" Demo analysis completed!")
         st.text_area("Analysis Results", analysis_result, height=400, key="analysis_output")
         
         # Demo export buttons
@@ -356,9 +357,9 @@ INDIVIDUAL RESULTS:
 
 # Quick Prompt Tester
 def show_prompt_tester():
-    st.title("🧪 Quick Prompt Tester")
+    st.title(" Quick Prompt Tester")
     
-    st.info("💡 This is the simple prompt tester. For full prompt testing features, check out Project 2 in the Projects tab!")
+    st.info(" This is the simple prompt tester. For full prompt testing features, check out Project 2 in the Projects tab!")
     
     prompt = st.text_area("Enter your prompt for testing", height=150, placeholder="e.g., Analyze the key themes in this medical consultation...")
     
@@ -375,53 +376,53 @@ Processed: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
 
 DEMO ANALYSIS:
 This prompt would be processed by the AI system and return:
-• Structured analysis based on prompt requirements
-• Relevant data extraction
-• Key insights and patterns
-• Confidence scores and metadata
+ Structured analysis based on prompt requirements
+ Relevant data extraction
+ Key insights and patterns
+ Confidence scores and metadata
 
 In the full system, this connects to real AI models for processing.
 For complete prompt testing features, use Project 2 in the Projects tab.
 """
                 
-                st.success("✅ Prompt processed!")
+                st.success(" Prompt processed!")
                 st.text_area("Response", demo_response, height=200)
             else:
                 st.warning("Please enter a prompt to test")
     
     with col2:
         st.markdown("**Quick Tips:**")
-        st.markdown("• Be specific in your prompt")
-        st.markdown("• Include context when needed")
-        st.markdown("• Test different variations")
-        st.markdown("• Use the Projects tab for advanced features")
+        st.markdown(" Be specific in your prompt")
+        st.markdown(" Include context when needed")
+        st.markdown(" Test different variations")
+        st.markdown(" Use the Projects tab for advanced features")
 
 # System Information
 def show_system_info():
-    st.title("ℹ️ A360 Project Hub - System Information")
+    st.title(" A360 Project Hub - System Information")
     
-    st.success("🎆 You are using the fully functional demo version of the A360 Internal Project Hub!")
+    st.success(" You are using the fully functional demo version of the A360 Internal Project Hub!")
     
     # System status
     col1, col2 = st.columns(2)
     
     with col1:
         st.subheader("System Status")
-        st.success("✅ User Interface - Fully Operational")
-        st.success("✅ Authentication System - Working")
-        st.success("✅ All Project Demos - Active")
-        st.success("✅ Navigation & Controls - Functional")
-        st.info("🔧 Database Integration - Ready for Setup")
-        st.info("🤖 AI Integration - Ready for Connection")
+        st.success(" User Interface - Fully Operational")
+        st.success(" Authentication System - Working")
+        st.success(" All Project Demos - Active")
+        st.success(" Navigation & Controls - Functional")
+        st.info(" Database Integration - Ready for Setup")
+        st.info(" AI Integration - Ready for Connection")
     
     with col2:
         st.subheader("Available Features")
-        st.markdown("• 🎯 Project 1: Synthetic Transcript Generator")
-        st.markdown("• 🧪 Project 2: Prompt Testing Sandbox")
-        st.markdown("• 🔍 Project 3: Transcript Analysis Dashboard")
-        st.markdown("• 📈 Interactive Dashboard")
-        st.markdown("• 🔐 Demo Authentication")
-        st.markdown("• 📥 File Upload/Download")
+        st.markdown("  Project 1: Synthetic Transcript Generator")
+        st.markdown("  Project 2: Prompt Testing Sandbox")
+        st.markdown("  Project 3: Transcript Analysis Dashboard")
+        st.markdown("  Interactive Dashboard")
+        st.markdown("  Demo Authentication")
+        st.markdown("  File Upload/Download")
     
     st.divider()
     
@@ -432,29 +433,29 @@ def show_system_info():
     
     with col1:
         st.markdown("**Frontend**")
-        st.markdown("• Streamlit Framework")
-        st.markdown("• A360 Custom Theme")
-        st.markdown("• Responsive Design")
-        st.markdown("• Interactive Components")
+        st.markdown(" Streamlit Framework")
+        st.markdown(" A360 Custom Theme")
+        st.markdown(" Responsive Design")
+        st.markdown(" Interactive Components")
     
     with col2:
         st.markdown("**Backend (Ready)**")
-        st.markdown("• Supabase Database")
-        st.markdown("• PostgreSQL Storage")
-        st.markdown("• Row Level Security")
-        st.markdown("• Real-time Updates")
+        st.markdown(" Supabase Database")
+        st.markdown(" PostgreSQL Storage")
+        st.markdown(" Row Level Security")
+        st.markdown(" Real-time Updates")
     
     with col3:
         st.markdown("**Integration (Ready)**")
-        st.markdown("• Warp AI Workflows")
-        st.markdown("• N8N Automation")
-        st.markdown("• File Processing")
-        st.markdown("• Export Capabilities")
+        st.markdown(" Warp AI Workflows")
+        st.markdown(" N8N Automation")
+        st.markdown(" File Processing")
+        st.markdown(" Export Capabilities")
     
     st.divider()
     
     # Next steps
-    st.subheader("🚀 Next Steps for Full Deployment")
+    st.subheader(" Next Steps for Full Deployment")
     
     with st.expander("1. Complete Database Setup", expanded=True):
         st.markdown("""
