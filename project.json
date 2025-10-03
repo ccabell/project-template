@@ -1,0 +1,36 @@
+{
+  "template": {
+    "name": "Collaborative Project Template",
+    "version": "1.0.0",
+    "description": "A comprehensive project template for collaborative development with GitHub integration and database reference",
+    "created": "2025-10-02",
+    "author": "Chris",
+    "type": "full-stack-template"
+  },
+  "features": [
+    "GitHub integration",
+    "Database configuration with development reference",
+    "Environment-based configuration",
+    "API documentation structure",
+    "Collaboration-ready documentation",
+    "Multi-language support (Node.js/Python)",
+    "Security best practices",
+    "Testing setup"
+  ],
+  "collaboration": {
+    "public_docs": true,
+    "private_code": true,
+    "reference_database": {
+      "development_only": true,
+      "production_warning": "Reference database not available in production"
+    }
+  },
+  "structure": {
+    "src/": "Source code directory",
+    "config/": "Configuration files and templates",
+    "docs/": "Project documentation for collaborators",
+    "scripts/": "Setup and automation scripts",
+    "tests/": "Test files and test data",
+    "database/": "Database schemas and reference documentation"
+  }
+}
