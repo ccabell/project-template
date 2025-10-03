@@ -138,45 +138,9 @@ if ($NodeJS -or (!$Python -and !$NodeJS)) {  # Default to Node.js if neither spe
     $packageContent = $packageContent -replace '\{\{GITHUB_USERNAME\}\}', $GitHubUsername
     Set-Content "$NewProjectPath\package.json" $packageContent
     
-    # Create basic source files
-    @"
-const express = require('express');
-const cors = require('cors');
-const helmet = require('helmet');
-require('dotenv').config();
-
-const app = express();
-const PORT = process.env.PORT || 3000;
-
-// Middleware
-app.use(helmet());
-app.use(cors());
-app.use(express.json());
-
-// Health check endpoint
-app.get('/api/health', (req, res) => {
-    res.json({
-        status: 'healthy',
-        timestamp: new Date().toISOString(),
-        version: '1.0.0',
-        database: 'connected'
-    });
-});
-
-// Basic data endpoint
-app.get('/api/data', (req, res) => {
-    res.json({
-        success: true,
-        message: 'API is working!',
-        data: []
-    });
-});
-
-app.listen(PORT, () => {
-    console.log(`Server running on http://localhost:`+ PORT);
-    console.log(`Health check: http://localhost:`+ PORT + '/api/health');
-});
-"@ | Set-Content "$NewProjectPath\src\index.js"
+    # Create basic source files from template
+    $nodeJsTemplate = Get-Content "$TemplateDir\src\index.js.template" -Raw
+    Set-Content "$NewProjectPath\src\index.js" $nodeJsTemplate
 }
 
 # Process requirements.txt (if Python selected)
@@ -184,82 +148,22 @@ if ($Python) {
     Write-Host "Setting up Python configuration..." -ForegroundColor Cyan
     Copy-Item "$TemplateDir\requirements.txt.template" "$NewProjectPath\requirements.txt"
     
-    # Create basic Python source files
-    @"
-from fastapi import FastAPI
-from fastapi.middleware.cors import CORSMiddleware
-from datetime import datetime
-import os
-
-app = FastAPI(title="$ProjectName", version="1.0.0")
-
-# CORS middleware
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
-
-@app.get("/api/health")
-async def health_check():
-    return {
-        "status": "healthy",
-        "timestamp": datetime.now().isoformat(),
-        "version": "1.0.0",
-        "database": "connected"
-    }
-
-@app.get("/api/data")
-async def get_data():
-    return {
-        "success": True,
-        "message": "API is working!",
-        "data": []
-    }
-
-if __name__ == "__main__":
-    import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=int(os.getenv("PORT", 8000)))
-"@ | Set-Content "$NewProjectPath\src\main.py"
+    # Create basic Python source files from template
+    $pythonTemplate = Get-Content "$TemplateDir\src\main.py.template" -Raw
+    $pythonContent = $pythonTemplate -replace '\{\{PROJECT_NAME\}\}', $ProjectName
+    Set-Content "$NewProjectPath\src\main.py" $pythonContent
 }
 
 # Add PageCraft configuration if included
 if ($IncludePageCraftAccess) {
     Write-Host "Adding PageCraft integration..." -ForegroundColor Yellow
     
-    # Create PageCraft configuration file
-    @"
-{
-  "pagecraft": {
-    "enabled": true,
-    "api_base_url": "\${PAGECRAFT_API_URL}",
-    "api_key": "\${PAGECRAFT_API_KEY}",
-    "integration_type": "full",
-    "description": "Integration with page-craft-bliss-forge-api system"
-  },
-  "endpoints": {
-    "health": "/api/pagecraft/health",
-    "content": "/api/pagecraft/content",
-    "templates": "/api/pagecraft/templates",
-    "publish": "/api/pagecraft/publish"
-  },
-  "permissions": {
-    "read": true,
-    "write": true,
-    "publish": true,
-    "admin": false
-  }
-}
-"@ | Set-Content "$NewProjectPath\config\pagecraft.json"
+    # Copy PageCraft configuration file
+    Copy-Item "$TemplateDir\config\pagecraft.example.json" "$NewProjectPath\config\pagecraft.json" -Force
     
     # Add PageCraft environment variables to .env.example
-    Add-Content "$NewProjectPath\.env.example" "
-# PageCraft Integration
-PAGECRAFT_API_URL=http://localhost:8080/api
-PAGECRAFT_API_KEY=your_pagecraft_api_key
-PAGECRAFT_ENABLED=true"
+    $pagecraftEnvVars = "`n# PageCraft Integration`nPAGECRAFT_API_URL=http://localhost:8080/api`nPAGECRAFT_API_KEY=your_pagecraft_api_key`nPAGECRAFT_ENABLED=true"
+    Add-Content "$NewProjectPath\.env.example" $pagecraftEnvVars
 }
 
 # Create base project if requested
@@ -340,62 +244,21 @@ if ($InitializeGit) {
     }
 }
 
-# Create setup instructions
-@"
-# $ProjectName Setup Instructions
+# Create setup instructions from template
+$setupTemplate = Get-Content "$TemplateDir\SETUP.md.template" -Raw
+$installCommands = if ($Python) { '   ```bash' + "`n" + '   pip install -r requirements.txt' + "`n" + '   ```' } else { '   ```bash' + "`n" + '   npm install' + "`n" + '   ```' }
+$runCommands = if ($Python) { '   ```bash' + "`n" + '   python -m uvicorn src.main:app --reload' + "`n" + '   ```' } else { '   ```bash' + "`n" + '   npm run dev' + "`n" + '   ```' }
+$language = if ($Python) { "Python/FastAPI" } else { "Node.js/Express" }
 
-## Quick Start
+$setupContent = $setupTemplate -replace '\{\{PROJECT_NAME\}\}', $ProjectName
+$setupContent = $setupContent -replace '\{\{PROJECT_PATH\}\}', $NewProjectPath
+$setupContent = $setupContent -replace '\{\{INSTALL_COMMANDS\}\}', $installCommands
+$setupContent = $setupContent -replace '\{\{RUN_COMMANDS\}\}', $runCommands
+$setupContent = $setupContent -replace '\{\{LANGUAGE\}\}', $language
+$setupContent = $setupContent -replace '\{\{AUTHOR_NAME\}\}', $AuthorName
+$setupContent = $setupContent -replace '\{\{CREATED_DATE\}\}', (Get-Date -Format "yyyy-MM-dd HH:mm")
 
-1. Navigate to the project directory:
-   \`\`\`bash
-   cd "$NewProjectPath"
-   \`\`\`
-
-2. Copy environment file:
-   \`\`\`bash
-   cp .env.example .env
-   \`\`\`
-
-3. Edit .env file with your settings
-
-4. Install dependencies:
-$(if ($Python) {
-   '   ```bash' + "`n" + '   pip install -r requirements.txt' + "`n" + '   ```'
-} else {
-   '   ```bash' + "`n" + '   npm install' + "`n" + '   ```'
-})
-
-5. Run the application:
-$(if ($Python) {
-   '   ```bash' + "`n" + '   python -m uvicorn src.main:app --reload' + "`n" + '   ```'
-} else {
-   '   ```bash' + "`n" + '   npm run dev' + "`n" + '   ```'
-})
-
-## Development Database Access
-
-For Warp users, you have access to the reference database:
-- URL: https://pma.nextnlp.com/
-- Credentials are managed through your Warp environment
-- **Important**: This is for development reference only
-
-## Next Steps
-
-1. Update the API documentation in \`docs/\` folder
-2. Configure your production database settings
-3. Set up GitHub repository if not done during creation
-4. Review and update the database schema documentation
-5. Customize the infrastructure documentation
-
-## Generated Files
-
-This project was generated with:
-- Language: $(if ($Python) { "Python/FastAPI" } else { "Node.js/Express" })
-- Author: $AuthorName
-- Created: $(Get-Date -Format "yyyy-MM-dd HH:mm")
-
-Happy coding! 🚀
-"@ | Set-Content "$NewProjectPath\SETUP.md"
+Set-Content "$NewProjectPath\SETUP.md" $setupContent
 
 Write-Host "`nProject creation completed successfully!" -ForegroundColor Green
 Write-Host "Project location: $NewProjectPath" -ForegroundColor Cyan
@@ -407,5 +270,5 @@ Write-Host "4. Install dependencies and start developing!" -ForegroundColor Whit
 
 if (!$InitializeGit) {
     Write-Host "`nTo initialize Git repository later, run:" -ForegroundColor Cyan
-    Write-Host "git init && git add . && git commit -m `"Initial commit`"" -ForegroundColor White
+    Write-Host "git init; git add .; git commit -m 'Initial commit'" -ForegroundColor White
 }

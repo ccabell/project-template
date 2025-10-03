@@ -24,7 +24,7 @@ function New-CollaborativeProject {
         [switch]$CreateGitHubRepo
     )
     
-    $templateScript = "C:\Users\Chris\Projects\project-template-master\scripts\create-new-project.ps1"
+    $templateScript = "C:\Users\Chris\b360\project-template\scripts\create-new-project.ps1"
     & $templateScript -ProjectName $Name -ProjectPath $Path -ProjectDescription $Description -NodeJS:$NodeJS -Python:$Python -InitializeGit -CreateGitHubRepo:$CreateGitHubRepo -GitHubUsername "ccabell"
 }
 
@@ -51,7 +51,7 @@ function New-A360Project {
         [switch]$CreateGitHubRepo
     )
     
-    $a360Script = "C:\Users\Chris\Projects\project-template-master\scripts\create-a360-project.ps1"
+    $a360Script = "C:\Users\Chris\b360\project-template\scripts\create-a360-project.ps1"
     & $a360Script -ProjectName $Name -ProjectDescription $Description -ProjectType $Type -Python:$Python -NodeJS:$NodeJS -CreateGitHubRepo:$CreateGitHubRepo
 }
 
@@ -90,13 +90,13 @@ function New-BaseProject {
         [switch]$RunAsAdmin
     )
     
-    $baseScript = "C:\Users\Chris\Projects\project-template-master\scripts\new-base-project.ps1"
+    $baseScript = "C:\Users\Chris\b360\project-template\scripts\new-base-project.ps1"
     & $baseScript -Name $Name -Description $Description -IncludePageCraft:$IncludePageCraft -CreateGitHub:$CreateGitHub -RunAsAdmin:$RunAsAdmin
 }
 
 # Function to quickly navigate to template
 function Go-Template {
-    Set-Location "C:\Users\Chris\Projects\project-template-master"
+    Set-Location "C:\Users\Chris\b360\project-template"
 }
 
 # Function to quickly navigate to PageCraft API
@@ -131,7 +131,7 @@ function New-PageCraftProject {
         [switch]$CreateGitHubRepo
     )
     
-    $templateScript = "C:\Users\Chris\Projects\project-template-master\scripts\create-new-project.ps1"
+    $templateScript = "C:\Users\Chris\b360\project-template\scripts\create-new-project.ps1"
     & $templateScript -ProjectName $Name -ProjectPath $Path -ProjectDescription $Description -NodeJS:$NodeJS -Python:$Python -IncludePageCraftAccess -InitializeGit -CreateGitHubRepo:$CreateGitHubRepo -GitHubUsername "ccabell"
 }
 

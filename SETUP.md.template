@@ -1,0 +1,45 @@
+# {{PROJECT_NAME}} Setup Instructions
+
+## Quick Start
+
+1. Navigate to the project directory:
+   ```bash
+   cd "{{PROJECT_PATH}}"
+   ```
+
+2. Copy environment file:
+   ```bash
+   cp .env.example .env
+   ```
+
+3. Edit .env file with your settings
+
+4. Install dependencies:
+{{INSTALL_COMMANDS}}
+
+5. Run the application:
+{{RUN_COMMANDS}}
+
+## Development Database Access
+
+For Warp users, you have access to the reference database:
+- URL: https://pma.nextnlp.com/
+- Credentials are managed through your Warp environment
+- **Important**: This is for development reference only
+
+## Next Steps
+
+1. Update the API documentation in `docs/` folder
+2. Configure your production database settings
+3. Set up GitHub repository if not done during creation
+4. Review and update the database schema documentation
+5. Customize the infrastructure documentation
+
+## Generated Files
+
+This project was generated with:
+- Language: {{LANGUAGE}}
+- Author: {{AUTHOR_NAME}}
+- Created: {{CREATED_DATE}}
+
+Happy coding! 🚀

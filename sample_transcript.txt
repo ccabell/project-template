@@ -1,0 +1,50 @@
+SAMPLE MEETING TRANSCRIPT - Project Planning Session
+
+Date: October 3, 2024
+Attendees: Sarah Johnson (Project Manager), Mike Chen (Developer), Lisa Rodriguez (Designer), Tom Wilson (Client)
+
+SARAH: Good morning everyone. Thanks for joining today's planning session for the new customer portal project. Let's start with a quick overview from Tom about the requirements.
+
+TOM: Thanks Sarah. So we're looking to build a customer portal that allows our clients to track their orders, manage their account information, and submit support tickets. The main pain point right now is that customers have to call us for everything, which is creating a lot of overhead for our support team.
+
+MIKE: That makes sense. What's the timeline looking like for this?
+
+TOM: We're hoping to launch by the end of December, so about 3 months from now.
+
+LISA: That's pretty tight. What about the design requirements? Do you have any existing brand guidelines or preferred layouts?
+
+TOM: Yes, we have our brand guidelines document. I can share that after the meeting. We'd like to keep the design clean and modern, similar to what Amazon or other e-commerce sites use for their account dashboards.
+
+SARAH: Excellent. Mike, from a technical perspective, what do you think about the feasibility?
+
+MIKE: It's definitely doable in 3 months. The biggest challenges will be integrating with our existing order management system and setting up secure authentication. I'd recommend using React for the frontend and Node.js for the backend API.
+
+TOM: What about database requirements?
+
+MIKE: We'll need to store user profiles, order history, and support tickets. I'm thinking PostgreSQL would be a good choice for this. It's reliable and scales well.
+
+LISA: For the design process, I'd like to start with wireframes next week and then move to high-fidelity mockups. Tom, would you be available for feedback sessions?
+
+TOM: Absolutely. I can make time on Tuesdays and Thursdays.
+
+SARAH: Great. Let me outline the key action items:
+1. Tom will share brand guidelines by end of week
+2. Lisa will create initial wireframes by next Tuesday
+3. Mike will research integration requirements with the order system
+4. We'll have weekly check-ins every Monday at 10 AM
+
+MIKE: One question - what about mobile responsiveness? Should this work well on phones and tablets?
+
+TOM: Yes, definitely. About 60% of our customers use mobile devices, so that's crucial.
+
+LISA: Noted. I'll make sure the designs are mobile-first.
+
+SARAH: Any other questions or concerns before we wrap up?
+
+TOM: Just one thing - we'll need to make sure the portal is accessible, following WCAG guidelines. We have customers with disabilities who need to be able to use this.
+
+MIKE: Good point. I'll make sure we build with accessibility in mind from the start.
+
+SARAH: Perfect. Thanks everyone. Let's reconvene next Monday to review progress. Meeting adjourned.
+
+END OF TRANSCRIPT
